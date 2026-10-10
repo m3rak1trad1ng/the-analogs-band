@@ -21,9 +21,10 @@ export const BAND = {
   /* Machine-readable genres for Google. Plain names: "Classic rock", "Funk". */
   genres: ["Classic rock", "Alternative rock", "Rock"] as string[],
 
-  /* One sentence under the name. Built only from the setlist, because that is
-     all that is known so far — add the size of the band ("Four pieces — …")
-     once the lineup below is filled in. */
+  /* One sentence under the name. Written from the band's setlist, which was
+     given as reference for describing the band — ⛔ not to be listed on the
+     site. Add the size of the band ("Four pieces — …") once the lineup below
+     is filled in. */
   hook: "Songs the whole room already knows — the Beatles and Pink Floyd through Nirvana, Pearl Jam and Adele.",
 
   /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
@@ -56,50 +57,6 @@ export const MARQUEE: string[] = [
   "Soul",
   "The ’60s to the 2010s",
   "Madison, Wisconsin",
-];
-
-/**
- * The setlist, in the order the band gave it (2026-10-09).
- *
- * `by` is the VERSION the band plays, not always who wrote it — "Ain't No
- * Sunshine" is listed under John Mayer and "I Will Survive" under Cake on
- * purpose. Three spellings were corrected from the list as sent: Heaven's,
- * R.E.M., Creedence.
- *
- * ⚠ Keep it current. A song on the page that the band no longer plays is the
- * one somebody will request. Empty hides the section and its nav link.
- */
-export const SETLIST: { song: string; by: string }[] = [
-  { song: "Live and Let Die", by: "Guns N’ Roses" },
-  { song: "Knockin’ on Heaven’s Door", by: "Guns N’ Roses" },
-  { song: "Comfortably Numb", by: "Pink Floyd" },
-  { song: "(Sittin’ On) The Dock of the Bay", by: "Otis Redding" },
-  { song: "Ain’t No Sunshine", by: "John Mayer" },
-  { song: "Come Together", by: "The Beatles" },
-  { song: "Let It Be", by: "The Beatles" },
-  { song: "Blackbird", by: "The Beatles" },
-  { song: "I Will Survive", by: "Cake" },
-  { song: "Everybody Hurts", by: "R.E.M." },
-  { song: "Every Breath You Take", by: "The Police" },
-  { song: "Wild World", by: "Mr. Big" },
-  { song: "Free Fallin’", by: "Tom Petty" },
-  { song: "Cocaine", by: "Eric Clapton" },
-  { song: "Come As You Are", by: "Nirvana" },
-  { song: "Roadhouse Blues", by: "The Doors" },
-  { song: "New Shoes", by: "Paolo Nutini" },
-  { song: "Sweet Emotion", by: "Aerosmith" },
-  { song: "Someone Like You", by: "Adele" },
-  { song: "Have You Ever Seen the Rain", by: "Creedence Clearwater Revival" },
-  { song: "No Woman, No Cry", by: "Bob Marley" },
-  { song: "Jeremy", by: "Pearl Jam" },
-  { song: "Fast Car", by: "Tracy Chapman" },
-  { song: "Just the Two of Us", by: "Bill Withers" },
-  { song: "Just Like Heaven", by: "The Cure" },
-  { song: "Life in the Fast Lane", by: "Eagles" },
-  { song: "Separate Ways", by: "Journey" },
-  { song: "Roll with the Changes", by: "REO Speedwagon" },
-  { song: "Money", by: "Pink Floyd" },
-  { song: "My City Was Gone", by: "Pretenders" },
 ];
 
 /** One wide group shot for the top of the band section. Drop the file in
