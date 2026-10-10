@@ -13,14 +13,15 @@ export default function Range() {
         <h2 className="poster">What we play</h2>
         <p className="lede">{RANGE_INTRO}</p>
 
-        <ul className="range">
-          {RANGE.map((r) => (
+        <ol className="range">
+          {RANGE.map((r, i) => (
             <li key={r.name}>
-              <span className="range-name">{r.name}</span>
+              <span className="range-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="range-name">{r.name}</h3>
               <p>{r.text}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

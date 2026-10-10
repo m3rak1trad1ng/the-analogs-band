@@ -43,7 +43,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${anton.variable} ${oswald.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        <a className="skip" href="#booking">Skip to booking</a>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,4 +1,5 @@
 import { BAND, PHOTOS } from "../content";
+import HeroArt from "./HeroArt";
 
 export default function Hero() {
   /* Two words stacked at woodtype scale is the entire visual identity.
@@ -21,6 +22,7 @@ export default function Hero() {
       ) : (
         <div className="hero-lights" aria-hidden="true" />
       )}
+      <HeroArt variant={BAND.heroArt} />
 
       <div className="wrap hero-inner">
         <div className="hero-rail label">

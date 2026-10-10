@@ -43,6 +43,10 @@ export const BAND = {
      ⚠ While this is "", the form shows but says booking is not open yet. */
   formKey: "",
 
+  /* The graphic in the hero: "meter" (a VU meter), "record" (a turning record),
+     "wave" (a signal trace) or "" for none. */
+  heroArt: "meter",
+
   /* The share card — 1200x630, dropped in public/ as og.jpg, then set this to
      "/og.jpg". Left empty the link still posts, just without a picture. */
   og: "/og.jpg",
