@@ -2,39 +2,44 @@
  * ⭐ EDIT THIS FILE, NOT THE COMPONENTS.
  * Every word, date and link on the site lives here.
  *
- * ⛔ NOT READY TO PUBLISH. This was copied from the Carper Diem site on
- * 2026-10-09 and everything in [square brackets] is a placeholder waiting on a
- * real answer. Nothing here was carried over from Carper Diem — no venues, no
- * dates, no lineup — because the wrong band's facts on a live page is worse
- * than a blank one. Search this file for "[" before it goes anywhere public.
+ * ⚠ BEFORE THIS GOES PUBLIC, CHECK THE THREE THINGS MARKED "ASSUMED" BELOW.
+ * The city and the setlist came from the band. `venues`, `radius` and the
+ * booking address did not — they are the Carper Diem lines, kept because the
+ * two bands work the same area, and nobody has confirmed them for this one.
  */
 
 export const BAND = {
   name: "The Analogs",
-  city: "[city, state]",
+  city: "Madison, Wisconsin",
   /* Absolute URL. Facebook and Google both require absolute image and page
      URLs — a relative path silently produces no share preview at all. */
   url: "https://www.theanalogsband.com",
 
   /* Genre + city. The one line a booker reads before deciding anything. */
-  kicker: "[genre] · [city, state]",
+  kicker: "Rock covers · Madison, Wisconsin",
 
   /* Machine-readable genres for Google. Plain names: "Classic rock", "Funk". */
-  genres: [] as string[],
+  genres: ["Classic rock", "Alternative rock", "Rock"] as string[],
 
-  /* One sentence: who is on stage and what the night sounds like. */
-  hook: "[One line about the band — how many pieces, what it sounds like.]",
+  /* One sentence under the name. Built only from the setlist, because that is
+     all that is known so far — add the size of the band ("Four pieces — …")
+     once the lineup below is filled in. */
+  hook: "Songs the whole room already knows — the Beatles and Pink Floyd through Nirvana, Pearl Jam and Adele.",
 
-  venues: "[The kinds of rooms the band plays.]",
-  radius: "[How far the band travels.]",
+  /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
+     probably right; change them if this band plays different rooms. */
+  venues: "Bars, breweries, wineries, festivals and private events.",
+  radius:
+    "Southern Wisconsin and northern Illinois — Madison, Milwaukee, the Dells, Chicago. Further for the right room.",
 
-  /* ⚠ PLACEHOLDER. Set this address up as a forward at the domain registrar,
-     pointing at whoever actually checks it. Don't ship a personal Gmail. */
+  /* ⚠ ASSUMED — THIS ADDRESS DOES NOT EXIST YET. Set it up as a forward at
+     GoDaddy, pointing at whoever actually checks it, or mail sent from the
+     site goes nowhere. Don't ship a personal Gmail. */
   email: "booking@theanalogsband.com",
 
   /* The share card — 1200x630, dropped in public/ as og.jpg, then set this to
      "/og.jpg". Left empty the link still posts, just without a picture. */
-  og: "",
+  og: "/og.jpg",
 
   socials: [
     { label: "Facebook", href: "" },
@@ -45,7 +50,57 @@ export const BAND = {
 
 /** The scrolling strip under the hero. Short fragments — genres, the city.
  *  Empty hides the strip. */
-export const MARQUEE: string[] = [];
+export const MARQUEE: string[] = [
+  "Classic rock",
+  "’90s alternative",
+  "Soul",
+  "The ’60s to the 2010s",
+  "Madison, Wisconsin",
+];
+
+/**
+ * The setlist, in the order the band gave it (2026-10-09).
+ *
+ * `by` is the VERSION the band plays, not always who wrote it — "Ain't No
+ * Sunshine" is listed under John Mayer and "I Will Survive" under Cake on
+ * purpose. Three spellings were corrected from the list as sent: Heaven's,
+ * R.E.M., Creedence.
+ *
+ * ⚠ Keep it current. A song on the page that the band no longer plays is the
+ * one somebody will request. Empty hides the section and its nav link.
+ */
+export const SETLIST: { song: string; by: string }[] = [
+  { song: "Live and Let Die", by: "Guns N’ Roses" },
+  { song: "Knockin’ on Heaven’s Door", by: "Guns N’ Roses" },
+  { song: "Comfortably Numb", by: "Pink Floyd" },
+  { song: "(Sittin’ On) The Dock of the Bay", by: "Otis Redding" },
+  { song: "Ain’t No Sunshine", by: "John Mayer" },
+  { song: "Come Together", by: "The Beatles" },
+  { song: "Let It Be", by: "The Beatles" },
+  { song: "Blackbird", by: "The Beatles" },
+  { song: "I Will Survive", by: "Cake" },
+  { song: "Everybody Hurts", by: "R.E.M." },
+  { song: "Every Breath You Take", by: "The Police" },
+  { song: "Wild World", by: "Mr. Big" },
+  { song: "Free Fallin’", by: "Tom Petty" },
+  { song: "Cocaine", by: "Eric Clapton" },
+  { song: "Come As You Are", by: "Nirvana" },
+  { song: "Roadhouse Blues", by: "The Doors" },
+  { song: "New Shoes", by: "Paolo Nutini" },
+  { song: "Sweet Emotion", by: "Aerosmith" },
+  { song: "Someone Like You", by: "Adele" },
+  { song: "Have You Ever Seen the Rain", by: "Creedence Clearwater Revival" },
+  { song: "No Woman, No Cry", by: "Bob Marley" },
+  { song: "Jeremy", by: "Pearl Jam" },
+  { song: "Fast Car", by: "Tracy Chapman" },
+  { song: "Just the Two of Us", by: "Bill Withers" },
+  { song: "Just Like Heaven", by: "The Cure" },
+  { song: "Life in the Fast Lane", by: "Eagles" },
+  { song: "Separate Ways", by: "Journey" },
+  { song: "Roll with the Changes", by: "REO Speedwagon" },
+  { song: "Money", by: "Pink Floyd" },
+  { song: "My City Was Gone", by: "Pretenders" },
+];
 
 /** One wide group shot for the top of the band section. Drop the file in
  *  public/photos/ and set src to "/photos/band.jpg". Leave "" and the section

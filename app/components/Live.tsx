@@ -15,8 +15,9 @@ export default function Live() {
           <h2 className="poster">See us play</h2>
           <div style={{ marginTop: "clamp(2.5rem, 5vw, 3.5rem)" }}>
             <div className="empty">
-              <strong>Footage going up after the next run</strong>
-              Email us in the meantime and we&rsquo;ll send clips straight over.
+              <strong>Photos and video coming soon</strong>
+              We&rsquo;re putting footage together now. Check back, or email us and
+              we&rsquo;ll let you know when it&rsquo;s up.
             </div>
           </div>
         </div>

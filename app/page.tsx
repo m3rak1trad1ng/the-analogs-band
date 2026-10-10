@@ -2,6 +2,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
 import Lineup from "./components/Lineup";
+import Setlist from "./components/Setlist";
 import Shows from "./components/Shows";
 import Live from "./components/Live";
 import Booking from "./components/Booking";
@@ -16,6 +17,7 @@ export default function Page() {
       <Marquee />
       <main>
         <Lineup />
+        <Setlist />
         <Shows />
         <Live />
         <Booking />
