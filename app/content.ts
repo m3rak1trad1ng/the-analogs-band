@@ -16,7 +16,7 @@ export const BAND = {
   url: "https://www.theanalogsband.com",
 
   /* Genre + city. The one line a booker reads before deciding anything. */
-  kicker: "Rock covers · Madison, Wisconsin",
+  kicker: "Cover band · Madison, Wisconsin",
 
   /* Machine-readable genres for Google. Plain names: "Classic rock", "Funk". */
   genres: ["Classic rock", "Alternative rock", "Rock"] as string[],
@@ -27,7 +27,7 @@ export const BAND = {
      is filled in. */
   /* ⛔ NO ARTIST NAMES OR SONG TITLES ANYWHERE ON THE SITE. Owner, 2026-10-09:
      describe the genres and the range, not specific bands. */
-  hook: "Classic rock, ’90s alternative and soul — six decades of songs the whole room already knows.",
+  hook: "Classic rock, ’90s alternative and soul, played for rooms that came to sing along.",
 
   /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
      probably right; change them if this band plays different rooms. */
@@ -59,6 +59,31 @@ export const MARQUEE: string[] = [
   "Soul",
   "The ’60s to the 2010s",
   "Madison, Wisconsin",
+];
+
+/**
+ * What the band plays, in three blocks. This is the answer to the one question
+ * a booker has about a cover band: "will my crowd know these songs?"
+ *
+ * ⛔ Genres and eras only — no artist names, no song titles (owner's rule).
+ * Written from the band's setlist; reword freely. Empty hides the section.
+ */
+export const RANGE_INTRO =
+  "Covers from the ’60s through the 2010s, picked for one thing: the room knows the words.";
+
+export const RANGE: { name: string; text: string }[] = [
+  {
+    name: "Classic rock",
+    text: "The ’60s and ’70s staples. Big choruses, long guitar solos, and the slow ones everybody ends up singing.",
+  },
+  {
+    name: "’80s & ’90s alternative",
+    text: "Arena rock, new wave and grunge-era radio — the stretch of the night where people remember every line.",
+  },
+  {
+    name: "Soul & acoustic",
+    text: "Soul, a little reggae and stripped-down ballads to change the pace between the loud ones.",
+  },
 ];
 
 /** One wide group shot for the top of the band section. Drop the file in
@@ -103,6 +128,15 @@ export const SHOWS: {
   end: string;
   ticket: string;
 }[] = [];
+
+/**
+ * How many empty frames the "See us play" section shows before there is
+ * anything to put in them. Each video or photo added below takes one frame;
+ * once there are more real ones than slots, the placeholders are gone. Set
+ * either to 0 to show no placeholders at all.
+ */
+export const VIDEO_SLOTS = 2;
+export const PHOTO_SLOTS = 3;
 
 /** YouTube videos. id: the part after v= in the URL. */
 export const VIDEOS: { id: string; title: string }[] = [];
