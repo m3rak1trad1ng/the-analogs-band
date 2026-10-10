@@ -2,14 +2,8 @@ import { BAND, PHOTOS } from "../content";
 import HeroArt from "./HeroArt";
 
 export default function Hero() {
-  /* Two words stacked at woodtype scale is the entire visual identity.
-     The second word carries the amber. */
-  const [line1, ...rest] = BAND.name.split(" ");
-  const line2 = rest.join(" ");
-
-  /* First photo in content.ts becomes the hero. Until there is one, stage
-     lights and halftone carry it — the page should never look broken for
-     want of an image. */
+  /* First photo in content.ts becomes the hero background. Until there is one,
+     the logo and the meter carry it. */
   const cover = PHOTOS[0];
 
   return (
@@ -22,19 +16,28 @@ export default function Hero() {
       ) : (
         <div className="hero-lights" aria-hidden="true" />
       )}
-      <HeroArt variant={BAND.heroArt} />
 
       <div className="wrap hero-inner">
         <div className="hero-rail label">
-          <span className="dot" aria-hidden="true" />
           <span>{BAND.kicker}</span>
+          <span className="dot" aria-hidden="true" />
           <span>Available for booking</span>
         </div>
 
-        <h1 className="poster">
-          {line1}
-          <span className="l2">{line2}</span>
+        {/* ⭐ THE BAND'S OWN LOGO IS THE HEADLINE. It is hand-lettered, and no
+            typeface set beside it could match it — so the name is the logo and
+            the page's type stays out of its way. The <h1> text is still there
+            for search engines and screen readers. */}
+        <h1 className="hero-title">
+          {BAND.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={BAND.logo} alt={BAND.name} width={1535} height={1024} />
+          ) : (
+            <span className="poster">{BAND.name}</span>
+          )}
         </h1>
+
+        <HeroArt variant={BAND.heroArt} />
 
         <p className="hero-hook">{BAND.hook}</p>
 

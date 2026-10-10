@@ -39,23 +39,25 @@ function Meter() {
 
   return (
     <div className="hero-art hero-art-meter" aria-hidden="true">
-      <svg viewBox="0 0 560 380">
+      <Signal flip />
+      <svg className="meter" viewBox="0 0 560 380">
         <defs>
           <linearGradient id="m-case" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#5d564a" />
-            <stop offset="0.08" stopColor="#3a352d" />
-            <stop offset="0.9" stopColor="#1b1814" />
-            <stop offset="1" stopColor="#2e2a23" />
+            <stop offset="0" stopColor="#c9a868" />
+            <stop offset="0.07" stopColor="#8a6a36" />
+            <stop offset="0.5" stopColor="#5a431f" />
+            <stop offset="0.93" stopColor="#33250f" />
+            <stop offset="1" stopColor="#6e5527" />
           </linearGradient>
           <linearGradient id="m-lip" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stopColor="#060504" />
             <stop offset="1" stopColor="#15120e" />
           </linearGradient>
           <radialGradient id="m-face" cx="50%" cy="108%" r="105%">
-            <stop offset="0" stopColor="#fff7dc" />
-            <stop offset="0.38" stopColor="#f6e2a8" />
-            <stop offset="0.72" stopColor="#e3ba63" />
-            <stop offset="1" stopColor="#a87a2c" />
+            <stop offset="0" stopColor="#fbf1d6" />
+            <stop offset="0.4" stopColor="#efdcae" />
+            <stop offset="0.75" stopColor="#d6b676" />
+            <stop offset="1" stopColor="#8f6a2e" />
           </radialGradient>
           <radialGradient id="m-vig" cx="50%" cy="60%" r="75%">
             <stop offset="0.55" stopColor="#000" stopOpacity="0" />
@@ -71,8 +73,9 @@ function Meter() {
             <stop offset="1" stopColor="#0f0d0a" />
           </linearGradient>
           <radialGradient id="m-hub" cx="38%" cy="30%" r="80%">
-            <stop offset="0" stopColor="#4a443a" />
-            <stop offset="1" stopColor="#0c0a08" />
+            <stop offset="0" stopColor="#d9bd82" />
+            <stop offset="0.45" stopColor="#7a5c2a" />
+            <stop offset="1" stopColor="#2a1d0a" />
           </radialGradient>
           {/* ⚠ userSpaceOnUse: a perfectly vertical line has a zero-width bounding
               box, and a filter sized as a percentage of nothing erases it. */}
@@ -83,7 +86,9 @@ function Meter() {
         </defs>
 
         <rect x="2" y="2" width="556" height="376" rx="24" fill="url(#m-case)" stroke="#080706" strokeWidth="2" />
-        <rect x="3.5" y="3.5" width="553" height="373" rx="23" fill="none" stroke="#fff" strokeOpacity="0.07" />
+        <rect x="3.5" y="3.5" width="553" height="373" rx="23" fill="none" stroke="#fff3d0" strokeOpacity="0.22" />
+        <rect x="12" y="12" width="536" height="356" rx="17" fill="none" stroke="#1a1206" strokeOpacity="0.55" strokeWidth="1.5" />
+        <rect x="13.5" y="13.5" width="533" height="353" rx="16" fill="none" stroke="#f3dca8" strokeOpacity="0.16" />
         <rect x="40" y="40" width="480" height="300" rx="10" fill="url(#m-lip)" />
 
         <g clipPath="url(#m-clip)">
@@ -140,7 +145,30 @@ function Meter() {
           </g>
         ))}
       </svg>
+      <Signal />
     </div>
+  );
+}
+
+/* The signal leaving the meter: a waveform that is loud at the meter and dies
+   away toward the edge of the page, the way the band's own artwork draws it. */
+function Signal({ flip = false }: { flip?: boolean }) {
+  const n = 46;
+  const bars = Array.from({ length: n }, (_, i) => {
+    const t = i / (n - 1);
+    /* Deterministic "noise": the same heights on the server and in the
+       browser, or React complains the two renders differ. */
+    const wob = 0.55 + 0.45 * Math.abs(Math.sin(i * 12.9898) * Math.cos(i * 4.1414));
+    const h = Math.max(1.5, 46 * Math.pow(1 - t, 1.7) * wob);
+    return { x: 6 + i * 6.4, h };
+  });
+  return (
+    <svg className={flip ? "signal signal-flip" : "signal"} viewBox="0 0 300 100" preserveAspectRatio="none">
+      <line x1="0" y1="50" x2="300" y2="50" className="signal-axis" />
+      {bars.map((b, i) => (
+        <line key={i} x1={b.x} y1={50 - b.h} x2={b.x} y2={50 + b.h} className="signal-bar" style={{ animationDelay: `${(i % 7) * 0.13}s` }} />
+      ))}
+    </svg>
   );
 }
 

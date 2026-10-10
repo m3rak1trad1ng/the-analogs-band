@@ -4,7 +4,7 @@
  *
  * ⚠ CHECK THE THINGS MARKED "ASSUMED" BELOW. The city and the setlist came
  * from the band. `venues` and `radius` are the Carper Diem lines, kept because
- * the two bands work the same area. The lineup is a guess at the instruments.
+ * the two bands work the same area.
  */
 
 export const BAND = {
@@ -26,7 +26,7 @@ export const BAND = {
      is filled in. */
   /* ⛔ NO ARTIST NAMES OR SONG TITLES ANYWHERE ON THE SITE. Owner, 2026-10-09:
      describe the genres and the range, not specific bands. */
-  hook: "Classic rock, ’90s alternative and soul, played for rooms that came to sing along.",
+  hook: "Four players. Classic rock, ’90s alternative and soul, for rooms that came to sing along.",
 
   /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
      probably right; change them if this band plays different rooms. */
@@ -46,6 +46,10 @@ export const BAND = {
   /* The graphic in the hero: "meter" (a VU meter), "record" (a turning record),
      "wave" (a signal trace) or "" for none. */
   heroArt: "meter",
+
+  /* The band's own logo, shown as the name at the top of the page. It sits on
+     black, which is why the page's background is black too. */
+  logo: "/brand/logo.webp",
 
   /* The share card — 1200x630, dropped in public/ as og.jpg, then set this to
      "/og.jpg". Left empty the link still posts, just without a picture. */
@@ -106,14 +110,12 @@ export const BAND_PHOTO = {
  * `photo` are optional.
  */
 export const LINEUP: { part: string; name?: string; photo?: string }[] = [
-  /* ⚠ ASSUMED — PLACEHOLDER ROWS. Only "lead guitar" is known for certain; the
-     rest is the usual four-piece. Fix the parts, add or remove rows, and add
-     `name:` to any of them. Four rows fill the grid evenly — see .lineup in
-     globals.css if the count changes. */
-  { part: "Vocals" },
-  { part: "Lead guitar" },
-  { part: "Bass" },
-  { part: "Drums" },
+  /* Parts and portraits are from the photos the band sent 2026-10-09. Add
+     `name:` to any row to print it above the part. */
+  { part: "Guitar", photo: "/band/guitar.jpg" },
+  { part: "Bass", photo: "/band/bass.jpg" },
+  { part: "Keys", photo: "/band/keys.jpg" },
+  { part: "Drums", photo: "/band/drums.jpg" },
 ];
 
 /**

@@ -24,7 +24,7 @@ export default function Lineup() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={BAND_PHOTO.src} alt={BAND_PHOTO.alt} />
           </figure>
-        ) : (
+        ) : hasPortraits ? null : (
           /* The frame the group shot will sit in. Set BAND_PHOTO.src in
              content.ts and this is replaced. */
           <div className="band-photo">

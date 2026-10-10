@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Anton, Oswald, Inter } from "next/font/google";
+import { Playfair_Display, Oswald, Inter } from "next/font/google";
 import { BAND } from "./content";
 import "./globals.css";
 
-/* Three faces, three jobs: Anton is the poster woodtype, Oswald handles labels
-   and buttons, Inter carries body copy. next/font self-hosts all three at build
-   time, so the published site makes no request to Google. */
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--f-poster" });
+/* Three faces, three jobs: Playfair Display is the headline serif — chosen to
+   sit beside the band's own hand-lettered logo, which a condensed poster face
+   fought with; Oswald handles labels and buttons; Inter carries body copy.
+   next/font self-hosts all three at build time. */
+const display = Playfair_Display({ subsets: ["latin"], weight: ["700", "900"], variable: "--f-poster" });
 const oswald = Oswald({ subsets: ["latin"], weight: ["500", "600"], variable: "--f-label" });
 const inter = Inter({ subsets: ["latin"], variable: "--f-body" });
 
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${anton.variable} ${oswald.variable} ${inter.variable}`}>
+    <html lang="en" className={`${display.variable} ${oswald.variable} ${inter.variable}`}>
       <body>
         <a className="skip" href="#booking">Skip to booking</a>
         {children}

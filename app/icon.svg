@@ -3,7 +3,7 @@
        Geometric rather than lettered: a webfont can't be relied on inside a
        favicon. One cycle of a sine wave — an analog signal — on the site's
        hot color. -->
-  <rect width="64" height="64" fill="#ff6a3d"/>
-  <path fill="none" stroke="#07090b" stroke-width="7" stroke-linecap="round"
+  <rect width="64" height="64" fill="#d9b872"/>
+  <path fill="none" stroke="#080808" stroke-width="7" stroke-linecap="round"
         d="M8 32 C 16 4, 24 4, 32 32 S 48 60, 56 32"/>
 </svg>
