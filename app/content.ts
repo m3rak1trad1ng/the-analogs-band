@@ -26,7 +26,7 @@ export const BAND = {
      is filled in. */
   /* ⛔ NO ARTIST NAMES OR SONG TITLES ANYWHERE ON THE SITE. Owner, 2026-10-09:
      describe the genres and the range, not specific bands. */
-  hook: "Four players. Classic rock, ’90s alternative and soul, for rooms that came to sing along.",
+  hook: "Four players, real instruments, and sixty years of songs the whole room knows by heart.",
 
   /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
      probably right; change them if this band plays different rooms. */
@@ -114,7 +114,7 @@ export const LINEUP: { part: string; name?: string; photo?: string }[] = [
      `name:` to any row to print it above the part. */
   { part: "Guitar", photo: "/band/guitar.jpg" },
   { part: "Bass", photo: "/band/bass.jpg" },
-  { part: "Keys", photo: "/band/keys.jpg" },
+  { part: "Keys & vocals", photo: "/band/keys.jpg" },
   { part: "Drums", photo: "/band/drums.jpg" },
 ];
 
