@@ -286,7 +286,28 @@ main .section::before {
 
 /* ⭐ The logo. `lighten` drops its black background into the page's black, and
    the mask feathers the edge so no rectangle is ever visible. */
-.hero-title { margin: clamp(0.25rem, 1vw, 0.75rem) 0 0; width: min(100%, 760px); }
+.hero-title { position: relative; margin: clamp(0.25rem, 1vw, 0.75rem) 0 0; width: min(100%, 760px); }
+/* ⭐ THE GLINT. A band of light crosses the logo every few seconds, the way
+   foil catches a spotlight. `color-dodge` is what makes it land only on the
+   lettering: it multiplies up whatever is already bright and leaves black
+   exactly black, so the band is invisible everywhere except on the gold. */
+.hero-title::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 43%, rgba(255,236,190,0.75) 50%, transparent 57%) no-repeat;
+  background-size: 260% 100%; background-position: 160% 0;
+  mix-blend-mode: color-dodge;
+  animation: glint 6.5s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite;
+}
+@keyframes glint { 0% { background-position: 160% 0; } 28%, 100% { background-position: -60% 0; } }
+
+/* The spotlight that follows the pointer (--mx / --my are set by HeroFx.tsx). */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 30%), rgba(243,220,166,0.13), transparent 70%);
+  transition: opacity 0.5s;
+}
+.hero[data-lit]::before { opacity: 1; }
+.hero-dust { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .hero-title img {
   width: 100%; height: auto; mix-blend-mode: lighten;
   -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 86%, transparent 100%);
@@ -801,5 +822,6 @@ main .section::before {
   .m-needle, .record, .vinyl-spin, .wave-a, .wave-b, .wave-c, .signal-bar, .hero-inner > * { animation: none; }
   .hero[data-hot] .m-needle { animation: none; transform: rotate(42deg); }
   .hero[data-hot] .signal-bar { animation: none; }
+  .hero-title::after { animation: none; }
   * { transition: none !important; }
 }
