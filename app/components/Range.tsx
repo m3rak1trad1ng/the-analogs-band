@@ -1,4 +1,5 @@
-import { RANGE, RANGE_INTRO } from "../content";
+import { BAND, RANGE, RANGE_INTRO } from "../content";
+import Vinyl from "./Vinyl";
 
 export default function Range() {
   if (RANGE.length === 0) return null;
@@ -17,10 +18,8 @@ export default function Range() {
             <h2 className="poster">What we play</h2>
             <p className="lede">{RANGE_INTRO}</p>
           </div>
-          <div className="range-record" aria-hidden="true">
-            <div className="record">
-              <div className="record-label"><span>The Analogs</span></div>
-            </div>
+          <div className="range-record">
+            <Vinyl name={BAND.name} city={BAND.city} />
           </div>
         </div>
 

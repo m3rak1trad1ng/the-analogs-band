@@ -134,6 +134,10 @@ function Meter() {
           <line x1="46" y1="296.5" x2="514" y2="296.5" stroke="#fff" strokeOpacity="0.14" />
           <circle cx="280" cy="318" r="27" fill="url(#m-hub)" stroke="#060504" strokeWidth="1.5" />
           <circle cx="280" cy="318" r="5" fill="#0a0806" stroke="#5d564a" strokeWidth="1" />
+          {/* The peak lamp: dark until the meter is driven into the red. */}
+          <text x="452" y="319" className="m-peak">PEAK</text>
+          <circle cx="484" cy="315" r="7.5" fill="#0a0806" stroke="#5d564a" strokeWidth="1" />
+          <circle cx="484" cy="315" r="5" className="m-lamp" />
           <path d="M46 46H350L196 334H46Z" fill="url(#m-glass)" />
           <rect x="46.5" y="46.5" width="467" height="287" rx="6" fill="none" stroke="#000" strokeOpacity="0.55" strokeWidth="3" />
         </g>

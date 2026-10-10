@@ -26,7 +26,9 @@ export const BAND = {
      is filled in. */
   /* ⛔ NO ARTIST NAMES OR SONG TITLES ANYWHERE ON THE SITE. Owner, 2026-10-09:
      describe the genres and the range, not specific bands. */
-  hook: "Four players, real instruments, and sixty years of songs the whole room knows by heart.",
+  /* Three words, set large in the headline serif. */
+  tagline: "Live. Loud. Analog.",
+  hook: "Four players and sixty years of songs you already know every word to — classic rock, ’90s alternative and soul, played the way they were made.",
 
   /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
      probably right; change them if this band plays different rooms. */

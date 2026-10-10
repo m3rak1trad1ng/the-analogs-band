@@ -10,10 +10,10 @@
 :root {
   /* The logo's own black. ⚠ Keep --ink-0 this dark: the logo image has a black
      background and anything lighter shows its rectangle. */
-  --ink-0:  #080808;
-  --ink-1:  #0f0e0c;
-  --ink-2:  #171512;
-  --rule:   #302a20;
+  --ink-0:  #050505;
+  --ink-1:  #0b0a09;
+  --ink-2:  #141210;
+  --rule:   #2e2618;
 
   /* ⚠ CONTRAST IS A HARD REQUIREMENT ON THIS SITE, NOT A PREFERENCE.
      Owner: "the median age in my band is like 70 so i don't think there is a
@@ -34,6 +34,16 @@
   /* The quiet gold: small labels, the dot, the hot marquee words. Same family
      as --amber, a step darker, so nothing on the page argues with it. */
   --signal:   #b89556;
+
+  /* ⭐ THE SECOND COLOR: OXBLOOD. Gold on black alone read as "yellow and
+     greyish black" (owner). A stage has a third thing in it — the curtain.
+     Deep red velvet behind gold lettering is the oldest look in live music,
+     and it is already in the band's own artwork as the record's label. Used
+     as a SURFACE (the marquee strip, the booking section), never as text. */
+  --wine-0: #160605;
+  --wine-1: #260b09;
+  --wine-2: #3a120e;
+  --wine-rule: #5a2219;
 
   /* Three faces, three jobs. --f-* come from next/font in layout.tsx, which
      self-hosts them at build time. Fallbacks matter: they're what renders if
@@ -68,7 +78,10 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.55;
+  /* ⚠ 0.55 lifted every black on the page to charcoal — the "greyish" in
+     the owner's "yellow and greyish black". Enough to break the flatness,
+     not enough to fog it. */
+  opacity: 0.22;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
 }
 
@@ -135,7 +148,17 @@ main .section::before {
 /* 0.84 is right for the hero, where the name is one word per line. Section
    headings wrap, and at 0.84 a comma on line one collides with the caps on
    line two. 0.92 clears descenders and still reads as poster leading. */
-.section h2 { font-size: clamp(1.9rem, 4vw, 3rem); max-width: 22ch; line-height: 1.05; }
+.section h2 { font-size: clamp(1.9rem, 4vw, 3rem); max-width: 22ch; line-height: 1.1; }
+
+/* ⭐ GOLD LEAF. A vertical run from pale to bronze and back — the way light
+   falls across foil stamping — clipped to the letters. A flat gold fill is
+   what made the page read as "yellow". The padding keeps descenders from
+   being clipped by the background box. */
+.section h2, .hero-tagline {
+  background: linear-gradient(180deg, #fff6dc 0%, #f0d9a2 30%, #c79d54 58%, #a67c36 72%, #ecd49a 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  padding-bottom: 0.12em;
+}
 
 .lede { color: var(--bone-2); max-width: 54ch; margin: 1.5rem 0 0; font-size: 1.15rem; }
 .lede-2 { margin-top: 0.6rem; color: var(--bone-3); font-size: 1.05rem; }
@@ -149,13 +172,13 @@ main .section::before {
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
 }
 .nav-mark {
-  /* ⚠ Deliberately NOT the headline serif. The hand-lettered logo is one scroll
-     away, and a second "The Analogs" in a different display face beside it
-     looked like a mistake. Small spaced capitals read as a label instead. */
-  font-family: var(--label); font-weight: 600; text-transform: uppercase;
-  font-size: 0.95rem; letter-spacing: 0.3em; color: var(--amber);
-  text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; min-height: 44px;
+  display: inline-flex; align-items: center; height: 52px; text-decoration: none;
+  font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3em; color: var(--amber);
+  opacity: 0; transform: translateY(6px); pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+.nav-mark img { height: 52px; width: auto; mix-blend-mode: lighten; }
+[data-past-hero] .nav-mark { opacity: 1; transform: none; pointer-events: auto; }
 .nav-links { display: flex; align-items: center; gap: 1.75rem; }
 /* ⛔ :not(.btn) IS LOAD-BEARING. Without it this rule (specificity 0,1,1)
    beats .btn (0,1,0) and repaints the booking button's text --bone-2 — tan on
@@ -180,12 +203,19 @@ main .section::before {
   border: 1px solid var(--amber);
   transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.btn:not(:disabled):hover { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(217,184,114,0.55); }
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.7) 50%, transparent 70%);
+  transform: translateX(-130%);
+}
+.btn:not(:disabled):not(.btn-ghost):hover::after { transform: translateX(130%); transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.btn:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(217,184,114,0.7), 0 0 0 1px var(--amber-hi); }
 .btn-ghost:not(:disabled):hover { box-shadow: none; }
 .btn:not(:disabled):active { transform: translateY(1px); box-shadow: none; }
 .btn:hover { background: var(--amber-hi); border-color: var(--amber-hi); }
 .btn-ghost { background: transparent; color: var(--bone); border-color: var(--rule); }
-.btn-ghost:hover { background: transparent; border-color: var(--bone); color: var(--bone); }
+.btn-ghost:hover { background: rgba(217,184,114,0.08); border-color: var(--amber); color: var(--amber); }
 .btn-sm { padding: 0.55rem 1.05rem; font-size: 0.74rem; min-height: 44px; }
 
 /* ============================================================
@@ -194,6 +224,13 @@ main .section::before {
    ============================================================ */
 
 .hero { position: relative; overflow: hidden; text-align: center; }
+/* A printed poster's border: one gold line set in from the edge, a finer one
+   inside it. */
+.hero::after {
+  content: ""; position: absolute; inset: clamp(8px, 1.4vw, 18px); z-index: 0; pointer-events: none;
+  border: 1px solid rgba(217,184,114,0.42);
+  box-shadow: inset 0 0 0 5px var(--ink-0), inset 0 0 0 6px rgba(217,184,114,0.2);
+}
 
 /* Photo layer. Duotone: desaturate, crush, then wash amber over it so any
    phone snapshot from a dark bar reads as intentional art direction. */
@@ -201,7 +238,7 @@ main .section::before {
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.35) brightness(0.5); }
 .hero-photo::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.2) 35%, rgba(8,8,8,0.96) 100%),
+  background: linear-gradient(180deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.2) 35%, rgba(5,5,5,0.96) 100%),
               radial-gradient(70% 80% at 25% 30%, rgba(217,184,114,0.17), transparent 65%);
   mix-blend-mode: normal;
 }
@@ -210,9 +247,13 @@ main .section::before {
 .hero-lights { position: absolute; inset: 0; z-index: 0; }
 .hero-lights::before {
   content: ""; position: absolute; inset: 0;
+  /* Two spotlights from above the frame, crossing behind the logo, and a warm
+     pool on the floor under the meter. */
   background:
-    radial-gradient(46% 52% at 50% 34%, rgba(217,184,114,0.13), transparent 70%),
-    radial-gradient(60% 40% at 50% 100%, rgba(184,149,86,0.10), transparent 75%);
+    conic-gradient(from 158deg at 22% -18%, transparent 0deg, rgba(236,203,140,0.13) 7deg, transparent 15deg),
+    conic-gradient(from 187deg at 78% -18%, transparent 0deg, rgba(236,203,140,0.13) 8deg, transparent 15deg),
+    radial-gradient(42% 46% at 50% 36%, rgba(217,184,114,0.16), transparent 72%),
+    radial-gradient(55% 34% at 50% 100%, rgba(120,34,22,0.38), transparent 78%);
 }
 /* Halftone dots — the print texture that separates this from a CSS gradient. */
 .hero-lights::after {
@@ -245,10 +286,15 @@ main .section::before {
 }
 .hero-title .poster { font-size: clamp(3rem, 9vw, 6.5rem); color: var(--amber); }
 
+.hero-tagline {
+  margin: clamp(1.4rem, 3vw, 2.1rem) 0 0;
+  font-size: clamp(1.9rem, 4.4vw, 3.1rem); font-style: italic; font-weight: 700;
+  line-height: 1.1; letter-spacing: -0.01em;
+}
 .hero-hook {
-  margin: clamp(1.5rem, 3vw, 2.2rem) 0 clamp(1.5rem, 3vw, 2rem);
+  margin: 0.9rem 0 clamp(1.5rem, 3vw, 2rem);
   font-size: clamp(1.08rem, 1.6vw, 1.25rem);
-  max-width: 44ch; line-height: 1.5; color: var(--bone-2);
+  max-width: 52ch; line-height: 1.55; color: var(--bone-2);
 }
 
 .hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
@@ -259,6 +305,7 @@ main .section::before {
 .hero-inner > :nth-child(3) { animation-delay: 0.16s; }
 .hero-inner > :nth-child(4) { animation-delay: 0.24s; }
 .hero-inner > :nth-child(5) { animation-delay: 0.32s; }
+.hero-inner > :nth-child(6) { animation-delay: 0.4s; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 /* ---------- hero art ---------- */
@@ -308,9 +355,30 @@ main .section::before {
   68% { transform: rotate(-10deg); } 77% { transform: rotate(9deg); } 86% { transform: rotate(24deg); }
   93% { transform: rotate(2deg); } 100% { transform: rotate(-30deg); }
 }
-/* ⭐ Hover or focus "Book the band" and the needle pins into the red. */
-.hero:has(.hero-cta .btn:not(.btn-ghost):hover) .m-needle,
-.hero:has(.hero-cta .btn:not(.btn-ghost):focus-visible) .m-needle { animation: none; transform: rotate(41deg); }
+/* ⭐ INTO THE RED. `data-hot` is set by HeroFx.tsx while "Book the band" or the
+   meter is hovered, focused or tapped. Everything analog about the hero
+   answers at once: the needle slams over and quivers against the stop, the
+   peak lamp lights, the dial's backlight comes up, and the signal on both
+   sides surges. ⚠ One nudge of the needle on its own was tried first and
+   read as nothing at all. */
+.m-lamp { fill: #3b1510; transition: fill 0.12s; }
+.m-peak { font-family: var(--label); font-size: 9px; font-weight: 600; letter-spacing: 0.2em; fill: #8d7a55; text-anchor: middle; dominant-baseline: middle; transition: fill 0.12s; }
+.hero-art-meter .meter { pointer-events: auto; transition: filter 0.3s, transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.hero[data-hot] .m-needle { animation: peg 0.42s cubic-bezier(0.2, 1.5, 0.4, 1) forwards, quiver 0.09s 0.42s linear infinite alternate; }
+.hero[data-hot] .m-lamp { fill: #ff5330; filter: drop-shadow(0 0 5px #ff5330) drop-shadow(0 0 12px rgba(255,83,48,0.8)); }
+.hero[data-hot] .m-peak { fill: #ffb9a6; }
+.hero[data-hot] .meter {
+  transform: scale(1.035);
+  filter: brightness(1.14) drop-shadow(0 2px 2px rgba(0,0,0,0.8)) drop-shadow(0 26px 34px rgba(0,0,0,0.7)) drop-shadow(0 0 90px rgba(236,203,140,0.5));
+}
+.hero[data-hot] .signal-bar { animation: surge 0.42s ease-in-out infinite; stroke: var(--amber-hi); stroke-width: 2; }
+.hero[data-hot] .signal-axis { opacity: 0.9; }
+.hero[data-hot] .hero-lights::before { opacity: 1.6; filter: brightness(1.6); }
+.hero-lights::before { transition: filter 0.4s; }
+@keyframes peg { from { transform: rotate(8deg); } to { transform: rotate(43deg); } }
+@keyframes quiver { from { transform: rotate(41.4deg); } to { transform: rotate(43.6deg); } }
+@keyframes surge { 0%, 100% { transform: scaleY(0.9); } 50% { transform: scaleY(1.9); } }
+
 @keyframes art-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* Record */
@@ -358,8 +426,9 @@ main .section::before {
 /* ---------- marquee ---------- */
 
 .marquee {
-  border-block: 1px solid var(--rule);
-  background: var(--ink-1);
+  border-block: 1px solid var(--wine-rule);
+  background: linear-gradient(180deg, var(--wine-2), var(--wine-0));
+  box-shadow: inset 0 1px 0 rgba(236,203,140,0.25), inset 0 -1px 0 rgba(0,0,0,0.6);
   overflow: hidden;
   padding-block: 0.85rem;
   display: flex;
@@ -369,8 +438,8 @@ main .section::before {
   animation: slide 38s linear infinite;
   will-change: transform;
 }
-.marquee span { font-family: var(--poster); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.05em; color: var(--bone-3); white-space: nowrap; }
-.marquee span.hot { color: var(--signal); }
+.marquee span { font-family: var(--poster); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.05em; color: #e6d3b8; white-space: nowrap; }
+.marquee span.hot { color: var(--amber); }
 @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
 /* ---------- the band ---------- */
@@ -443,8 +512,8 @@ main .section::before {
 .lineup-shot::after {
   content: ""; position: absolute; inset: 0; z-index: 2;
   background:
-    radial-gradient(78% 62% at 50% 34%, transparent 42%, rgba(8,8,8,0.82) 100%),
-    linear-gradient(180deg, transparent 58%, rgba(8,8,8,0.9) 100%);
+    radial-gradient(78% 62% at 50% 34%, transparent 42%, rgba(5,5,5,0.82) 100%),
+    linear-gradient(180deg, transparent 58%, rgba(5,5,5,0.9) 100%);
   box-shadow: inset 0 0 0 1px rgba(217,184,114,0.28);
   transition: opacity 0.4s;
 }
@@ -561,12 +630,28 @@ main .section::before {
   .range p { grid-column: 2; }
 }
 
-.range-top { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; padding-bottom: clamp(2rem, 4vw, 3rem); min-height: clamp(180px, 20vw, 250px); }
+.range-top { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; padding-bottom: clamp(2rem, 4vw, 3rem); min-height: clamp(230px, 27vw, 350px); }
 .range-top + .range { margin-top: 0; }
-.range-record { position: absolute; right: 2%; top: 8px; width: clamp(260px, 30vw, 400px); }
-.range-record .record { animation-duration: 26s; }
-.range-record .record-label span { font-size: clamp(0.7rem, 1.1vw, 0.95rem); margin-top: 18%; font-weight: 900; }
+.range-record { position: absolute; right: 2%; top: 6px; width: clamp(280px, 33vw, 440px); }
 @media (max-width: 760px) { .range-record { right: -18%; opacity: 0.55; } }
+
+.vinyl { position: relative; aspect-ratio: 1; border-radius: 50%; filter: drop-shadow(0 26px 40px rgba(0,0,0,0.8)); }
+.vinyl svg { display: block; width: 100%; height: 100%; }
+.vinyl-spin { transform-origin: 200px 200px; animation: spin 14s linear infinite; }
+.vinyl-ring { font-family: var(--label); font-size: 8.4px; font-weight: 600; letter-spacing: 0.23em; fill: #f3dfae; }
+.vinyl-the { font-family: var(--label); font-size: 9px; font-weight: 600; letter-spacing: 0.5em; fill: #f3dfae; text-anchor: middle; }
+.vinyl-side { font-family: var(--label); font-size: 7px; font-weight: 500; letter-spacing: 0.4em; fill: #f3dfae; opacity: 0.85; text-anchor: middle; }
+/* The light. Two opposite wedges, fixed, over the grooves only — the mask
+   keeps them off the label and off the page. */
+.vinyl-sheen {
+  position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from 28deg,
+    transparent 0deg, rgba(255,244,214,0.20) 16deg, rgba(255,255,255,0.05) 30deg, transparent 52deg,
+    transparent 180deg, rgba(255,244,214,0.16) 198deg, rgba(255,255,255,0.04) 212deg, transparent 232deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 39%, #000 40% 99%, transparent 100%);
+  mask-image: radial-gradient(circle, transparent 0 39%, #000 40% 99%, transparent 100%);
+  mix-blend-mode: screen;
+}
 
 /* ---------- photos ---------- */
 
@@ -600,7 +685,19 @@ main .section::before {
    panel and an amber email at poster scale, not from a color flip.
    ============================================================ */
 
-.booking { background: radial-gradient(60% 90% at 85% 0%, rgba(184,149,86,0.07), transparent 70%), var(--ink-1); border-top: 1px solid var(--rule); }
+.booking {
+  /* Velvet: a deep red that is brightest where the light would hit it, with
+     faint vertical folds. */
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, transparent 3px 54px, rgba(255,220,180,0.035) 54px 57px, transparent 57px 108px),
+    radial-gradient(90% 110% at 50% 0%, var(--wine-2) 0%, var(--wine-1) 45%, var(--wine-0) 100%);
+  border-top: 1px solid var(--wine-rule);
+  box-shadow: inset 0 1px 0 rgba(236,203,140,0.22);
+}
+.booking .book-cta { border-top-color: var(--wine-rule); }
+.booking .book-form input, .booking .book-form textarea { background: rgba(5,5,5,0.55); border-color: rgba(217,184,114,0.28); }
+.booking .section-head .hr { background: var(--wine-rule); }
+.booking .lede-2 { color: #cdb9a0; }
 
 
 .book-cta {
@@ -665,6 +762,8 @@ main .section::before {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
-  .m-needle, .record, .wave-a, .wave-b, .wave-c, .signal-bar, .hero-inner > * { animation: none; }
+  .m-needle, .record, .vinyl-spin, .wave-a, .wave-b, .wave-c, .signal-bar, .hero-inner > * { animation: none; }
+  .hero[data-hot] .m-needle { animation: none; transform: rotate(42deg); }
+  .hero[data-hot] .signal-bar { animation: none; }
   * { transition: none !important; }
 }

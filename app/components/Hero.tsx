@@ -1,5 +1,6 @@
 import { BAND, PHOTOS } from "../content";
 import HeroArt from "./HeroArt";
+import HeroFx from "./HeroFx";
 
 export default function Hero() {
   /* First photo in content.ts becomes the hero background. Until there is one,
@@ -39,13 +40,15 @@ export default function Hero() {
 
         <HeroArt variant={BAND.heroArt} />
 
+        {BAND.tagline && <p className="hero-tagline poster">{BAND.tagline}</p>}
         <p className="hero-hook">{BAND.hook}</p>
 
         <div className="hero-cta">
-          <a href="#booking" className="btn">Book the band</a>
+          <a href="#booking" className="btn" data-hot>Book the band</a>
           <a href="#shows" className="btn btn-ghost">Upcoming shows</a>
         </div>
       </div>
+      <HeroFx />
     </header>
   );
 }

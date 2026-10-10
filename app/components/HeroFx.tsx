@@ -1,0 +1,50 @@
+"use client";
+
+import { useEffect } from "react";
+
+/**
+ * Two small behaviors for the top of the page. No rendering — it only sets
+ * attributes that the stylesheet reacts to.
+ *
+ * 1. `data-hot` on the hero while "Book the band" or the meter itself is
+ *    hovered, focused or touched. The stylesheet turns that into the meter
+ *    going into the red: needle pinned, peak lamp lit, dial brighter, the
+ *    signal on both sides surging.
+ *    ⚠ An attribute rather than a CSS :hover chain so a TAP works too — a phone
+ *    has no hover, and most of this traffic is a phone. A tap holds it for a
+ *    second and a half, long enough to be seen.
+ *
+ * 2. `data-past-hero` on <html> once the big logo has scrolled off, which is
+ *    what fades the small logo into the nav.
+ */
+export default function HeroFx() {
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>(".hero");
+    if (!hero) return;
+    const triggers = hero.querySelectorAll<HTMLElement>("[data-hot], .meter");
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const on = () => { clearTimeout(timer); hero.setAttribute("data-hot", ""); };
+    const off = () => { clearTimeout(timer); hero.removeAttribute("data-hot"); };
+    const tap = () => { on(); timer = setTimeout(off, 1500); };
+    triggers.forEach((t) => {
+      t.addEventListener("pointerenter", (e) => (e as PointerEvent).pointerType === "mouse" && on());
+      t.addEventListener("pointerleave", (e) => (e as PointerEvent).pointerType === "mouse" && off());
+      t.addEventListener("focus", on);
+      t.addEventListener("blur", off);
+      t.addEventListener("pointerdown", (e) => (e as PointerEvent).pointerType !== "mouse" && tap());
+    });
+
+    /* ⚠ A plain passive scroll check — no IntersectionObserver, no
+       requestAnimationFrame. Both were tried and both failed to fire in a
+       background tab, which left the nav logo hidden for good. One rect read
+       per scroll event is nothing. */
+    const title = hero.querySelector(".hero-title");
+    const onScroll = () => {
+      if (title) document.documentElement.toggleAttribute("data-past-hero", title.getBoundingClientRect().bottom < 70);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(timer); };
+  }, []);
+  return null;
+}
