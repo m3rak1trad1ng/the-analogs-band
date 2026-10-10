@@ -10,8 +10,19 @@ export default function Range() {
           <span className="label">The set</span>
           <span className="hr" />
         </div>
-        <h2 className="poster">What we play</h2>
-        <p className="lede">{RANGE_INTRO}</p>
+        {/* The heading sits in a clipped box so the record can rise from the
+            first rule like a record half out of its sleeve. */}
+        <div className="range-top">
+          <div>
+            <h2 className="poster">What we play</h2>
+            <p className="lede">{RANGE_INTRO}</p>
+          </div>
+          <div className="range-record" aria-hidden="true">
+            <div className="record">
+              <div className="record-label"><span>The Analogs</span></div>
+            </div>
+          </div>
+        </div>
 
         <ol className="range">
           {RANGE.map((r, i) => (

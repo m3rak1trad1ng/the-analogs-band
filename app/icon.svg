@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <!-- Favicon. Next picks app/icon.svg up automatically — no <link> needed.
-       Geometric rather than lettered: a webfont can't be relied on inside a
-       favicon. One cycle of a sine wave — an analog signal — on the site's
-       hot color. -->
-  <rect width="64" height="64" fill="#d9b872"/>
-  <path fill="none" stroke="#080808" stroke-width="7" stroke-linecap="round"
-        d="M8 32 C 16 4, 24 4, 32 32 S 48 60, 56 32"/>
+       A guitar pick, the shape the band's own artwork puts its logo on, with
+       one cycle of a sine wave: an analog signal. Geometric rather than
+       lettered, because a webfont cannot be relied on inside a favicon. -->
+  <rect width="64" height="64" rx="12" fill="#080808"/>
+  <path fill="#d9b872" d="M32 59C21 46 7 31 9 18 10.500 9 20 5 32 5s21.500 4 23 13C57 31 43 46 32 59z"/>
+  <path fill="none" stroke="#080808" stroke-width="4.500" stroke-linecap="round" d="M18 26c4-11 9-11 14 0s10 11 14 0"/>
 </svg>

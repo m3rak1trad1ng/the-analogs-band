@@ -115,6 +115,19 @@ p { text-wrap: pretty; }
    the gap, not the padding, before changing it again. */
 .section { padding-block: clamp(2.5rem, 4.5vw, 3.5rem); position: relative; }
 
+/* ⭐ THE LOGO'S OWN ORNAMENT, BETWEEN EVERY SECTION. The four-point star and
+   the thin gold line are lifted from the band's logo, so the page below the
+   hero belongs to the same piece of artwork instead of dropping to plain text
+   on black. One background: the star in the middle, a hairline either side
+   that fades out before it reaches the edges. */
+main .section::before {
+  content: ""; display: block; height: 22px;
+  width: min(100% - 2 * var(--pad), var(--maxw)); margin: 0 auto clamp(2.25rem, 4.5vw, 3.5rem);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath fill='%23d9b872' d='M11 0c.8 7 3 9.500 11 11-8 1.500-10.200 4-11 11-.8-7-3-9.500-11-11 8-1.500 10.200-4 11-11z'/%3E%3C/svg%3E") center / 22px 22px no-repeat,
+    linear-gradient(90deg, transparent 0%, rgba(217,184,114,0.5) 22%, rgba(217,184,114,0.5) calc(50% - 26px), transparent calc(50% - 26px), transparent calc(50% + 26px), rgba(217,184,114,0.5) calc(50% + 26px), rgba(217,184,114,0.5) 78%, transparent 100%) center / 100% 1px no-repeat;
+}
+
 .section-head { display: flex; align-items: baseline; gap: 1.25rem; margin-bottom: 2rem; }
 .section-head .label { color: var(--signal); white-space: nowrap; }
 .section-head .hr { flex: 1; height: 1px; background: var(--rule); }
@@ -287,7 +300,7 @@ p { text-wrap: pretty; }
 .m-vu { font-family: var(--label); font-size: 30px; font-weight: 600; fill: #1c150c; text-anchor: middle; letter-spacing: 0.22em; }
 .m-brand { font-family: var(--label); font-size: 8.5px; font-weight: 500; fill: #1c150c; opacity: 0.7; text-anchor: middle; letter-spacing: 0.32em; }
 .m-needle line { stroke: #120d07; stroke-width: 2.4; stroke-linecap: round; }
-.m-needle { transform-origin: 280px 400px; transform: rotate(6deg); animation: needle 6.5s cubic-bezier(0.45, 0.05, 0.3, 1) infinite; }
+.m-needle { transform-origin: 280px 400px; transform: rotate(6deg); transition: transform 0.4s cubic-bezier(0.3, 1.7, 0.5, 1); animation: needle 6.5s cubic-bezier(0.45, 0.05, 0.3, 1) infinite; }
 @keyframes needle {
   0% { transform: rotate(-30deg); } 7% { transform: rotate(4deg); } 13% { transform: rotate(-6deg); }
   21% { transform: rotate(14deg); } 27% { transform: rotate(7deg); } 36% { transform: rotate(21deg); }
@@ -295,6 +308,9 @@ p { text-wrap: pretty; }
   68% { transform: rotate(-10deg); } 77% { transform: rotate(9deg); } 86% { transform: rotate(24deg); }
   93% { transform: rotate(2deg); } 100% { transform: rotate(-30deg); }
 }
+/* ⭐ Hover or focus "Book the band" and the needle pins into the red. */
+.hero:has(.hero-cta .btn:not(.btn-ghost):hover) .m-needle,
+.hero:has(.hero-cta .btn:not(.btn-ghost):focus-visible) .m-needle { animation: none; transform: rotate(41deg); }
 @keyframes art-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* Record */
@@ -309,7 +325,7 @@ p { text-wrap: pretty; }
 }
 .record-label {
   position: absolute; inset: 34%; border-radius: 50%;
-  background: radial-gradient(circle, #0b0a09 0 5%, var(--amber) 5.5% 62%, var(--signal) 62.5% 100%);
+  background: radial-gradient(circle, #080808 0 5%, #e6cb8e 5.5% 30%, var(--amber) 30.5% 64%, #8a6a36 64.5% 100%);
   display: flex; align-items: flex-start; justify-content: center;
 }
 .record-label span {
@@ -545,6 +561,13 @@ p { text-wrap: pretty; }
   .range p { grid-column: 2; }
 }
 
+.range-top { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; padding-bottom: clamp(2rem, 4vw, 3rem); min-height: clamp(180px, 20vw, 250px); }
+.range-top + .range { margin-top: 0; }
+.range-record { position: absolute; right: 2%; top: 8px; width: clamp(260px, 30vw, 400px); }
+.range-record .record { animation-duration: 26s; }
+.range-record .record-label span { font-size: clamp(0.7rem, 1.1vw, 0.95rem); margin-top: 18%; font-weight: 900; }
+@media (max-width: 760px) { .range-record { right: -18%; opacity: 0.55; } }
+
 /* ---------- photos ---------- */
 
 .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; }
@@ -622,9 +645,19 @@ p { text-wrap: pretty; }
 
 /* ---------- footer ---------- */
 
-.footer { border-top: 1px solid var(--rule); padding-block: 2.75rem; color: var(--bone-3); font-size: 0.98rem; }
-.footer-inner { display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: space-between; align-items: center; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.footer { padding-block: 0 3rem; color: var(--bone-3); font-size: 0.98rem; text-align: center; }
+.footer::before {
+  content: ""; display: block; height: 22px;
+  width: min(100% - 2 * var(--pad), var(--maxw)); margin: 0 auto 1.5rem;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath fill='%23d9b872' d='M11 0c.8 7 3 9.500 11 11-8 1.500-10.200 4-11 11-.8-7-3-9.500-11-11 8-1.500 10.200-4 11-11z'/%3E%3C/svg%3E") center / 22px 22px no-repeat,
+    linear-gradient(90deg, transparent 0%, rgba(217,184,114,0.5) 22%, rgba(217,184,114,0.5) calc(50% - 26px), transparent calc(50% - 26px), transparent calc(50% + 26px), rgba(217,184,114,0.5) calc(50% + 26px), rgba(217,184,114,0.5) 78%, transparent 100%) center / 100% 1px no-repeat;
+}
+.footer-inner { display: flex; flex-direction: column; gap: 0.6rem; align-items: center; }
+.footer-logo { width: min(70vw, 260px); height: auto; mix-blend-mode: lighten; opacity: 0.92;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 84%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 84%, transparent 100%); }
+.footer-line { letter-spacing: 0.04em; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; justify-content: center; }
 .footer-soon { opacity: 0.5; display: inline-flex; align-items: center; min-height: 44px; cursor: default; }
 .footer-links a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
 .footer-links a:hover { color: var(--amber); }

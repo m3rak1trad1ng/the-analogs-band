@@ -4,7 +4,11 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="wrap footer-inner">
-        <div>{BAND.name} · {BAND.city}</div>
+        {BAND.logo && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="footer-logo" src={BAND.logo} alt="" width={1535} height={1024} loading="lazy" />
+        )}
+        <div className="footer-line">{BAND.name} · {BAND.city}</div>
         <div className="footer-links label">
           {BAND.socials.map((s) =>
             s.href ? (
