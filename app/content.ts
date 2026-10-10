@@ -25,7 +25,9 @@ export const BAND = {
      given as reference for describing the band — ⛔ not to be listed on the
      site. Add the size of the band ("Four pieces — …") once the lineup below
      is filled in. */
-  hook: "Songs the whole room already knows — the Beatles and Pink Floyd through Nirvana, Pearl Jam and Adele.",
+  /* ⛔ NO ARTIST NAMES OR SONG TITLES ANYWHERE ON THE SITE. Owner, 2026-10-09:
+     describe the genres and the range, not specific bands. */
+  hook: "Classic rock, ’90s alternative and soul — six decades of songs the whole room already knows.",
 
   /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
      probably right; change them if this band plays different rooms. */
