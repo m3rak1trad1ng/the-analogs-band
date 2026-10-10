@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon. Next picks app/icon.svg up automatically — no <link> needed.
+       Geometric rather than lettered: a webfont can't be relied on inside a
+       favicon. One cycle of a sine wave — an analog signal — on the site's
+       hot color. -->
+  <rect width="64" height="64" fill="#ff6a3d"/>
+  <path fill="none" stroke="#07090b" stroke-width="7" stroke-linecap="round"
+        d="M8 32 C 16 4, 24 4, 32 32 S 48 60, 56 32"/>
+</svg>
