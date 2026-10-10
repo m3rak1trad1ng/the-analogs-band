@@ -35,17 +35,19 @@
      as --amber, a step darker, so nothing on the page argues with it. */
   --signal:   #b89556;
 
-  /* ⭐ THE SECOND COLOR: MIDNIGHT BLUE. Gold on black alone read as "yellow and
-     greyish black" (owner), so the page needed a second color to sit behind
-     the gold. Oxblood was tried first and he asked for something better than
-     burgundy. Navy is the classic partner for gold — and blue was one of the
-     only two colors he picked out of thirty. Used as a SURFACE (the marquee
-     strip, the booking section), never as text.
+  /* ⭐ THE SECOND COLOR: TOBACCO BROWN. Gold on black alone read as "yellow and
+     greyish black" (owner), so the page needed a second color behind the
+     gold. Oxblood and midnight blue were both tried; out of five shown side by
+     side he chose this one — the brown of a walnut cabinet or an amp's
+     leather. Used as a SURFACE (the marquee strip, the booking section),
+     never as text.
+     ⚠ Gold has less contrast on brown than on black, so text on these
+     surfaces is the cream, not the gold, wherever it has to be read.
      ⚠ The variables keep the name --wine-* from the first attempt. */
-  --wine-0: #050a15;
-  --wine-1: #0a1428;
-  --wine-2: #11203e;
-  --wine-rule: #2a3f66;
+  --wine-0: #120b06;
+  --wine-1: #1e130a;
+  --wine-2: #2e1e10;
+  --wine-rule: #51381f;
 
   /* Three faces, three jobs. --f-* come from next/font in layout.tsx, which
      self-hosts them at build time. Fallbacks matter: they're what renders if
@@ -259,7 +261,7 @@ main .section::before {
     conic-gradient(from 158deg at 22% -18%, transparent 0deg, rgba(236,203,140,0.13) 7deg, transparent 15deg),
     conic-gradient(from 187deg at 78% -18%, transparent 0deg, rgba(236,203,140,0.13) 8deg, transparent 15deg),
     radial-gradient(42% 46% at 50% 36%, rgba(217,184,114,0.16), transparent 72%),
-    radial-gradient(55% 34% at 50% 100%, rgba(28,58,116,0.42), transparent 78%);
+    radial-gradient(55% 34% at 50% 100%, rgba(110,70,30,0.42), transparent 78%);
 }
 /* Halftone dots — the print texture that separates this from a CSS gradient. */
 .hero-lights::after {
@@ -718,10 +720,10 @@ main .section::before {
    ============================================================ */
 
 .booking {
-  /* A curtain: deep blue, brightest where the light would hit it, with faint
+  /* A curtain: deep brown, brightest where the light would hit it, with faint
      vertical folds. */
   background:
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, transparent 3px 54px, rgba(190,215,255,0.03) 54px 57px, transparent 57px 108px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, transparent 3px 54px, rgba(255,225,185,0.035) 54px 57px, transparent 57px 108px),
     radial-gradient(90% 110% at 50% 0%, var(--wine-2) 0%, var(--wine-1) 45%, var(--wine-0) 100%);
   border-top: 1px solid var(--wine-rule);
   box-shadow: inset 0 1px 0 rgba(236,203,140,0.22);
@@ -729,7 +731,9 @@ main .section::before {
 .booking .book-cta { border-top-color: var(--wine-rule); }
 .booking .book-form input, .booking .book-form textarea { background: rgba(5,5,5,0.55); border-color: rgba(217,184,114,0.28); }
 .booking .section-head .hr { background: var(--wine-rule); }
-.booking .lede-2 { color: #b9c0cf; }
+.booking .lede-2 { color: #d6c6ac; }
+.booking .section-head .label, .booking .book-cta-kicker { color: var(--amber); }
+.booking .book-form label > span { color: var(--bone); }
 
 
 .book-cta {
