@@ -3,8 +3,8 @@
  * Every word, date and link on the site lives here.
  *
  * ⚠ CHECK THE THINGS MARKED "ASSUMED" BELOW. The city and the setlist came
- * from the band. `venues` and `radius` are the Carper Diem lines, kept because
- * the two bands work the same area.
+ * from the band. `venues` is the Carper Diem line, kept because the two bands
+ * work the same area.
  */
 
 export const BAND = {
@@ -30,11 +30,14 @@ export const BAND = {
   tagline: "Live. Loud. Analog.",
   hook: "Four players and sixty years of songs you already know every word to — classic rock, ’90s alternative and soul, played the way they were made.",
 
-  /* ⚠ ASSUMED — both lines are Carper Diem's, word for word. Same area, so
-     probably right; change them if this band plays different rooms. */
+  /* ⚠ ASSUMED — the venue list is Carper Diem's, word for word. Change it if
+     this band plays different rooms. */
   venues: "Bars, breweries, wineries, festivals and private events.",
-  radius:
-    "Southern Wisconsin and northern Illinois — Madison, Milwaukee, the Dells, Chicago. Further for the right room.",
+  /* ⛔ NOT NORTHERN ILLINOIS. The first version carried Carper Diem's travel
+     line — Milwaukee, the Dells, Chicago — and the owner's answer was "why
+     northern Illinois? no...." Nothing beyond Madison has been confirmed for
+     this band, so the line claims nothing beyond it. */
+  radius: "Madison and the surrounding area.",
 
   /* ⭐ WHERE THE BOOKING FORM SENDS. There is no band email address on purpose
      (owner: not paying for one) — the form on the page posts to Web3Forms,
