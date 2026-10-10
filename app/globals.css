@@ -137,6 +137,15 @@ p { text-wrap: pretty; }
    hero belongs to the same piece of artwork instead of dropping to plain text
    on black. One background: the star in the middle, a hairline either side
    that fades out before it reaches the edges. */
+/* Depth for the plain sections: a warm pool of light behind the heading and
+   black at the edges, instead of one flat value edge to edge. */
+main .section:not(.booking) {
+  background:
+    radial-gradient(60% 55% at 22% 18%, rgba(110,74,34,0.20), transparent 70%),
+    radial-gradient(50% 60% at 100% 100%, rgba(60,40,18,0.16), transparent 70%);
+}
+body { background-image: radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(0,0,0,0.6) 100%); background-attachment: fixed; }
+
 main .section::before {
   content: ""; display: block; height: 22px;
   width: min(100% - 2 * var(--pad), var(--maxw)); margin: 0 auto clamp(2.25rem, 4.5vw, 3.5rem);
@@ -231,7 +240,18 @@ main .section::before {
    edge to edge, over a photo if one exists.
    ============================================================ */
 
-.hero { position: relative; overflow: hidden; text-align: center; }
+.hero {
+  position: relative; overflow: hidden; text-align: center;
+  /* ⭐ THE FRONT OF AN AMP. Speaker-grille cloth — a fine diamond weave in
+     dull gold thread — lit from the middle and falling to black at the edges.
+     It gives the lights something to land on; on flat black they were just
+     gradients. */
+  background:
+    radial-gradient(85% 75% at 50% 42%, transparent 0%, rgba(5,5,5,0.55) 60%, #050505 100%),
+    repeating-linear-gradient(45deg, rgba(217,184,114,0.085) 0 1.5px, transparent 1.5px 7px),
+    repeating-linear-gradient(-45deg, rgba(217,184,114,0.085) 0 1.5px, transparent 1.5px 7px),
+    radial-gradient(70% 60% at 50% 40%, #1a140c 0%, #0a0806 70%, #050505 100%);
+}
 /* A printed poster's border: one gold line set in from the edge, a finer one
    inside it. */
 .hero::after {
@@ -287,18 +307,8 @@ main .section::before {
 /* ⭐ The logo. `lighten` drops its black background into the page's black, and
    the mask feathers the edge so no rectangle is ever visible. */
 .hero-title { position: relative; margin: clamp(0.25rem, 1vw, 0.75rem) 0 0; width: min(100%, 760px); }
-/* ⭐ THE GLINT. A band of light crosses the logo every few seconds, the way
-   foil catches a spotlight. `color-dodge` is what makes it land only on the
-   lettering: it multiplies up whatever is already bright and leaves black
-   exactly black, so the band is invisible everywhere except on the gold. */
-.hero-title::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(105deg, transparent 43%, rgba(255,236,190,0.75) 50%, transparent 57%) no-repeat;
-  background-size: 260% 100%; background-position: 160% 0;
-  mix-blend-mode: color-dodge;
-  animation: glint 6.5s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite;
-}
-@keyframes glint { 0% { background-position: 160% 0; } 28%, 100% { background-position: -60% 0; } }
+/* ⛔ No light effect ON the logo. A sweeping glint was tried and the owner's
+   word for it was "the weird flash thing" — the logo is left alone. */
 
 /* The spotlight that follows the pointer (--mx / --my are set by HeroFx.tsx). */
 .hero::before {
@@ -455,9 +465,12 @@ main .section::before {
 /* ---------- marquee ---------- */
 
 .marquee {
-  border-block: 1px solid var(--wine-rule);
-  background: linear-gradient(180deg, var(--wine-2), var(--wine-0));
-  box-shadow: inset 0 1px 0 rgba(236,203,140,0.25), inset 0 -1px 0 rgba(0,0,0,0.6);
+  /* A strip of the same walnut, with a brass edge top and bottom. */
+  border-block: 1px solid #7a5a2c;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0045 0.42' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.03  0 0 0 0 0.015  0 0 0 -2.1 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E") 0 0 / 900px 600px,
+    linear-gradient(180deg, #3e2814, #1c1108);
+  box-shadow: inset 0 1px 0 rgba(255,222,170,0.3), inset 0 -1px 0 rgba(0,0,0,0.7), 0 10px 30px -10px rgba(0,0,0,0.9);
   overflow: hidden;
   padding-block: 0.85rem;
   display: flex;
@@ -661,7 +674,7 @@ main .section::before {
 
 .range-top { display: flex; justify-content: space-between; align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
 .range-top + .range { margin-top: 0; }
-.range-record { flex: 0 0 auto; width: clamp(300px, 38vw, 500px); }
+.range-record { flex: 0 0 auto; width: clamp(320px, 44vw, 600px); }
 
 /* ---------- album ---------- */
 .album { position: relative; aspect-ratio: 1.62; --sl: 61.7%; }
@@ -692,15 +705,14 @@ main .section::before {
 .range-top:hover .album-disc { left: 43%; }
 .range-top:hover .album-sleeve { transform: rotate(-4deg); }
 .vinyl-spin { transform-origin: 200px 200px; animation: spin 9s linear infinite; }
-/* The light. Two opposite wedges, FIXED, over the grooves only — the mask
-   keeps them off the label and off the page. */
+/* ⭐ THE LIGHT IS AN IMAGE, COMPUTED PER PIXEL (scripts/make-vinyl-sheen.mjs).
+   Two CSS gradient wedges were smooth, and smooth is what a drawing of a
+   record looks like. On real vinyl every groove throws the light slightly
+   differently, so the highlight is streaky along its length and fringed with
+   color at its edges. It stays FIXED while the disc turns under it. */
 .vinyl-sheen {
   position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-  background: conic-gradient(from 20deg,
-    transparent 0deg, rgba(255,246,220,0.05) 8deg, rgba(255,246,220,0.30) 22deg, rgba(255,255,255,0.08) 36deg, transparent 58deg,
-    transparent 180deg, rgba(255,246,220,0.04) 188deg, rgba(255,246,220,0.22) 202deg, rgba(255,255,255,0.05) 216deg, transparent 238deg);
-  -webkit-mask-image: radial-gradient(circle, transparent 0 38%, #000 39.500% 99%, transparent 100%);
-  mask-image: radial-gradient(circle, transparent 0 38%, #000 39.500% 99%, transparent 100%);
+  background: url("/brand/vinyl-sheen.png") center / 100% 100% no-repeat;
   mix-blend-mode: screen;
 }
 @media (max-width: 860px) {
@@ -741,13 +753,17 @@ main .section::before {
    ============================================================ */
 
 .booking {
-  /* A curtain: deep brown, brightest where the light would hit it, with faint
-     vertical folds. */
+  /* ⭐ WALNUT, NOT A BROWN RECTANGLE. Two layers of generated grain — long
+     dark figure and a fine light fleck — over a brown that is lit from the
+     top like a cabinet under a lamp. The grain is noise stretched hard along
+     one axis, which is all wood grain is. */
   background:
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, transparent 3px 54px, rgba(255,225,185,0.035) 54px 57px, transparent 57px 108px),
-    radial-gradient(90% 110% at 50% 0%, var(--wine-2) 0%, var(--wine-1) 45%, var(--wine-0) 100%);
-  border-top: 1px solid var(--wine-rule);
-  box-shadow: inset 0 1px 0 rgba(236,203,140,0.22);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0045 0.42' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.03  0 0 0 0 0.015  0 0 0 -2.1 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E") 0 0 / 900px 600px,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='500'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.9' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.6  0 0 0 0 0.32  0 0 0 -1.6 0.72'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E") 0 0 / 700px 500px,
+    radial-gradient(100% 120% at 50% 0%, #4a3018 0%, #2e1c0e 45%, #170d06 100%);
+  background-blend-mode: normal, soft-light, normal;
+  border-top: 1px solid #6b4a25;
+  box-shadow: inset 0 1px 0 rgba(255,222,170,0.28), inset 0 30px 60px -30px rgba(0,0,0,0.5), inset 0 -80px 90px -40px rgba(0,0,0,0.7);
 }
 .booking .book-cta { border-top-color: var(--wine-rule); }
 .booking .book-form input, .booking .book-form textarea { background: rgba(5,5,5,0.55); border-color: rgba(217,184,114,0.28); }
@@ -822,6 +838,5 @@ main .section::before {
   .m-needle, .record, .vinyl-spin, .wave-a, .wave-b, .wave-c, .signal-bar, .hero-inner > * { animation: none; }
   .hero[data-hot] .m-needle { animation: none; transform: rotate(42deg); }
   .hero[data-hot] .signal-bar { animation: none; }
-  .hero-title::after { animation: none; }
   * { transition: none !important; }
 }

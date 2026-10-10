@@ -28,7 +28,9 @@ export const BAND = {
      describe the genres and the range, not specific bands. */
   /* Three words, set large in the headline serif. */
   tagline: "Live. Loud. Analog.",
-  hook: "Four players and sixty years of songs you already know every word to — classic rock, ’90s alternative and soul, played the way they were made.",
+  /* ⛔ Do not count the band in this line. "Four players…" — owner: "why say
+     4 players, that sounds dumb af." Say what they play and stop. */
+  hook: "Classic rock, ’90s alternative and soul — the songs you already know every word to.",
 
   /* ⚠ ASSUMED — the venue list is Carper Diem's, word for word. Change it if
      this band plays different rooms. */
