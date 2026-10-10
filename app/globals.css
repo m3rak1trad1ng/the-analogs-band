@@ -35,15 +35,17 @@
      as --amber, a step darker, so nothing on the page argues with it. */
   --signal:   #b89556;
 
-  /* ⭐ THE SECOND COLOR: OXBLOOD. Gold on black alone read as "yellow and
-     greyish black" (owner). A stage has a third thing in it — the curtain.
-     Deep red velvet behind gold lettering is the oldest look in live music,
-     and it is already in the band's own artwork as the record's label. Used
-     as a SURFACE (the marquee strip, the booking section), never as text. */
-  --wine-0: #160605;
-  --wine-1: #260b09;
-  --wine-2: #3a120e;
-  --wine-rule: #5a2219;
+  /* ⭐ THE SECOND COLOR: MIDNIGHT BLUE. Gold on black alone read as "yellow and
+     greyish black" (owner), so the page needed a second color to sit behind
+     the gold. Oxblood was tried first and he asked for something better than
+     burgundy. Navy is the classic partner for gold — and blue was one of the
+     only two colors he picked out of thirty. Used as a SURFACE (the marquee
+     strip, the booking section), never as text.
+     ⚠ The variables keep the name --wine-* from the first attempt. */
+  --wine-0: #050a15;
+  --wine-1: #0a1428;
+  --wine-2: #11203e;
+  --wine-rule: #2a3f66;
 
   /* Three faces, three jobs. --f-* come from next/font in layout.tsx, which
      self-hosts them at build time. Fallbacks matter: they're what renders if
@@ -168,17 +170,21 @@ main .section::before {
 .nav { position: sticky; top: 0; z-index: 60; background: var(--ink-0); border-bottom: 1px solid var(--rule); }
 .nav-inner {
   max-width: var(--maxw); margin: 0 auto;
-  padding: 0.5rem var(--pad);
+  padding: 0.3rem var(--pad);
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
 }
 .nav-mark {
-  display: inline-flex; align-items: center; height: 52px; text-decoration: none;
+  display: inline-flex; align-items: center; height: 60px; text-decoration: none;
   font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3em; color: var(--amber);
-  opacity: 0; transform: translateY(6px); pointer-events: none;
-  transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.nav-mark img { height: 52px; width: auto; mix-blend-mode: lighten; }
-[data-past-hero] .nav-mark { opacity: 1; transform: none; pointer-events: auto; }
+.nav-mark img {
+  height: 60px; width: auto; mix-blend-mode: lighten;
+  /* Feathered like the big one, or the image's own black shows as a box. */
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 80%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 80%, transparent 100%);
+}
+.nav-mark:hover { transform: scale(1.04); }
 .nav-links { display: flex; align-items: center; gap: 1.75rem; }
 /* ⛔ :not(.btn) IS LOAD-BEARING. Without it this rule (specificity 0,1,1)
    beats .btn (0,1,0) and repaints the booking button's text --bone-2 — tan on
@@ -253,7 +259,7 @@ main .section::before {
     conic-gradient(from 158deg at 22% -18%, transparent 0deg, rgba(236,203,140,0.13) 7deg, transparent 15deg),
     conic-gradient(from 187deg at 78% -18%, transparent 0deg, rgba(236,203,140,0.13) 8deg, transparent 15deg),
     radial-gradient(42% 46% at 50% 36%, rgba(217,184,114,0.16), transparent 72%),
-    radial-gradient(55% 34% at 50% 100%, rgba(120,34,22,0.38), transparent 78%);
+    radial-gradient(55% 34% at 50% 100%, rgba(28,58,116,0.42), transparent 78%);
 }
 /* Halftone dots — the print texture that separates this from a CSS gradient. */
 .hero-lights::after {
@@ -630,27 +636,53 @@ main .section::before {
   .range p { grid-column: 2; }
 }
 
-.range-top { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; padding-bottom: clamp(2rem, 4vw, 3rem); min-height: clamp(230px, 27vw, 350px); }
+.range-top { display: flex; justify-content: space-between; align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
 .range-top + .range { margin-top: 0; }
-.range-record { position: absolute; right: 2%; top: 6px; width: clamp(280px, 33vw, 440px); }
-@media (max-width: 760px) { .range-record { right: -18%; opacity: 0.55; } }
+.range-record { flex: 0 0 auto; width: clamp(300px, 38vw, 500px); }
 
-.vinyl { position: relative; aspect-ratio: 1; border-radius: 50%; filter: drop-shadow(0 26px 40px rgba(0,0,0,0.8)); }
-.vinyl svg { display: block; width: 100%; height: 100%; }
-.vinyl-spin { transform-origin: 200px 200px; animation: spin 14s linear infinite; }
-.vinyl-ring { font-family: var(--label); font-size: 8.4px; font-weight: 600; letter-spacing: 0.23em; fill: #f3dfae; }
-.vinyl-the { font-family: var(--label); font-size: 9px; font-weight: 600; letter-spacing: 0.5em; fill: #f3dfae; text-anchor: middle; }
-.vinyl-side { font-family: var(--label); font-size: 7px; font-weight: 500; letter-spacing: 0.4em; fill: #f3dfae; opacity: 0.85; text-anchor: middle; }
-/* The light. Two opposite wedges, fixed, over the grooves only — the mask
+/* ---------- album ---------- */
+.album { position: relative; aspect-ratio: 1.62; --sl: 61.7%; }
+.album-sleeve {
+  position: absolute; left: 0; top: 0; height: 100%; aspect-ratio: 1; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  /* Printed card, not a flat black square: a little light from the upper
+     left, and a worn edge. */
+  background: radial-gradient(120% 120% at 20% 10%, #1a1712 0%, #0a0908 55%, #050505 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(217,184,114,0.5), inset 0 0 0 7px #080807, inset 0 0 0 8px rgba(217,184,114,0.28),
+    inset 3px 0 0 rgba(255,255,255,0.04),
+    0 2px 2px rgba(0,0,0,0.7), 0 30px 50px -10px rgba(0,0,0,0.85);
+  transform: rotate(-2.5deg); transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.album-sleeve img { width: 86%; height: auto; mix-blend-mode: lighten; }
+.album-foot {
+  position: absolute; left: 9%; right: 9%; bottom: 7.500%; display: flex; justify-content: space-between;
+  font-family: var(--label); font-size: clamp(0.5rem, 0.8vw, 0.66rem); font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--signal);
+}
+.album-disc {
+  position: absolute; top: 3%; height: 94%; aspect-ratio: 1; left: 39%; z-index: 1; border-radius: 50%;
+  filter: drop-shadow(0 18px 24px rgba(0,0,0,0.8));
+  transition: left 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.album-disc svg { display: block; width: 100%; height: 100%; }
+/* Hover the cover and the record slides further out. */
+.range-top:hover .album-disc { left: 43%; }
+.range-top:hover .album-sleeve { transform: rotate(-4deg); }
+.vinyl-spin { transform-origin: 200px 200px; animation: spin 9s linear infinite; }
+/* The light. Two opposite wedges, FIXED, over the grooves only — the mask
    keeps them off the label and off the page. */
 .vinyl-sheen {
   position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-  background: conic-gradient(from 28deg,
-    transparent 0deg, rgba(255,244,214,0.20) 16deg, rgba(255,255,255,0.05) 30deg, transparent 52deg,
-    transparent 180deg, rgba(255,244,214,0.16) 198deg, rgba(255,255,255,0.04) 212deg, transparent 232deg);
-  -webkit-mask-image: radial-gradient(circle, transparent 0 39%, #000 40% 99%, transparent 100%);
-  mask-image: radial-gradient(circle, transparent 0 39%, #000 40% 99%, transparent 100%);
+  background: conic-gradient(from 20deg,
+    transparent 0deg, rgba(255,246,220,0.05) 8deg, rgba(255,246,220,0.30) 22deg, rgba(255,255,255,0.08) 36deg, transparent 58deg,
+    transparent 180deg, rgba(255,246,220,0.04) 188deg, rgba(255,246,220,0.22) 202deg, rgba(255,255,255,0.05) 216deg, transparent 238deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 38%, #000 39.500% 99%, transparent 100%);
+  mask-image: radial-gradient(circle, transparent 0 38%, #000 39.500% 99%, transparent 100%);
   mix-blend-mode: screen;
+}
+@media (max-width: 860px) {
+  .range-top { flex-direction: column; align-items: flex-start; }
+  .range-record { width: min(100%, 420px); align-self: center; }
 }
 
 /* ---------- photos ---------- */
@@ -686,10 +718,10 @@ main .section::before {
    ============================================================ */
 
 .booking {
-  /* Velvet: a deep red that is brightest where the light would hit it, with
-     faint vertical folds. */
+  /* A curtain: deep blue, brightest where the light would hit it, with faint
+     vertical folds. */
   background:
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, transparent 3px 54px, rgba(255,220,180,0.035) 54px 57px, transparent 57px 108px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, transparent 3px 54px, rgba(190,215,255,0.03) 54px 57px, transparent 57px 108px),
     radial-gradient(90% 110% at 50% 0%, var(--wine-2) 0%, var(--wine-1) 45%, var(--wine-0) 100%);
   border-top: 1px solid var(--wine-rule);
   box-shadow: inset 0 1px 0 rgba(236,203,140,0.22);
@@ -697,7 +729,7 @@ main .section::before {
 .booking .book-cta { border-top-color: var(--wine-rule); }
 .booking .book-form input, .booking .book-form textarea { background: rgba(5,5,5,0.55); border-color: rgba(217,184,114,0.28); }
 .booking .section-head .hr { background: var(--wine-rule); }
-.booking .lede-2 { color: #cdb9a0; }
+.booking .lede-2 { color: #b9c0cf; }
 
 
 .book-cta {

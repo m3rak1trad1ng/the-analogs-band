@@ -19,7 +19,7 @@ export default function Range() {
             <p className="lede">{RANGE_INTRO}</p>
           </div>
           <div className="range-record">
-            <Vinyl name={BAND.name} city={BAND.city} />
+            <Vinyl logo={BAND.logo} name={BAND.name} city={BAND.city} />
           </div>
         </div>
 
