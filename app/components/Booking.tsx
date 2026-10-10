@@ -1,4 +1,5 @@
 import { BAND, BAND_PHOTO } from "../content";
+import BookingForm from "./BookingForm";
 
 export default function Booking() {
   return (
@@ -17,14 +18,15 @@ export default function Booking() {
         <p className="lede lede-2">{BAND.radius}</p>
 
         <div className="book-cta">
-          <div>
+          <div className="book-form-col">
             <p className="label book-cta-kicker">Tell us the date and the room</p>
-            {/* No form on purpose — a plain address is one tap on a phone and
-                needs nothing running on a server. */}
-            <a className="book-email" href={`mailto:${BAND.email}`}>{BAND.email}</a>
+            {/* ⚠ A FORM HERE, WHERE CARPER DIEM HAS A PLAIN ADDRESS. This band
+                has no email address of its own, so the form is the contact:
+                it forwards to one person's inbox without printing that
+                person's address on a public page. */}
+            <BookingForm formKey={BAND.formKey} band={BAND.name} />
           </div>
           <div className="book-actions">
-            <a className="btn" href={`mailto:${BAND.email}`}>Email us</a>
             {/* Venues build their own posters and social graphics for every act
                 they book. Without this they'd be right-clicking a darkened,
                 desaturated image off the page — so hand them the clean file.

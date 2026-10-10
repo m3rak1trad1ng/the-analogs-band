@@ -8,6 +8,7 @@ import Live from "./components/Live";
 import Booking from "./components/Booking";
 import Footer from "./components/Footer";
 import StructuredData from "./components/StructuredData";
+import Reveal from "./components/Reveal";
 
 export default function Page() {
   return (
@@ -24,6 +25,7 @@ export default function Page() {
       </main>
       <Footer />
       <StructuredData />
+      <Reveal />
     </>
   );
 }

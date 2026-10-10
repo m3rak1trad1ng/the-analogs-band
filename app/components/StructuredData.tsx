@@ -20,7 +20,6 @@ export default function StructuredData() {
     url: BAND.url,
     ...(BAND.og ? { image: `${BAND.url}${BAND.og}` } : {}),
     genre: BAND.genres,
-    email: `mailto:${BAND.email}`,
     foundingLocation: { "@type": "Place", name: BAND.city },
     ...(BAND.socials.some((s) => s.href)
       ? { sameAs: BAND.socials.filter((s) => s.href).map((s) => s.href) }

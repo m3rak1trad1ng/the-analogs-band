@@ -1,4 +1,5 @@
 import { VIDEOS, PHOTOS, VIDEO_SLOTS, PHOTO_SLOTS } from "../content";
+import Gallery from "./Gallery";
 
 /**
  * Video and photos — with the frames already in place before there is anything
@@ -58,21 +59,7 @@ export default function Live() {
           </div>
         )}
 
-        {gallery.length + emptyPhotos > 0 && (
-          <div className="photo-grid" style={{ marginTop: "1.5rem" }}>
-            {gallery.map((p) => (
-              /* Plain <img>: next/image's optimizer can't run on a static
-                 export, so the wrapper buys nothing. */
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={p.src} src={p.src} alt={p.alt} loading="lazy" />
-            ))}
-            {Array.from({ length: emptyPhotos }, (_, i) => (
-              <div className="slot slot-photo" key={`slot-${i}`}>
-                <span className="label">Photo coming soon</span>
-              </div>
-            ))}
-          </div>
-        )}
+        {gallery.length + emptyPhotos > 0 && <Gallery photos={gallery} empty={emptyPhotos} />}
       </div>
     </section>
   );

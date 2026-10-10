@@ -2,10 +2,9 @@
  * ⭐ EDIT THIS FILE, NOT THE COMPONENTS.
  * Every word, date and link on the site lives here.
  *
- * ⚠ BEFORE THIS GOES PUBLIC, CHECK THE THREE THINGS MARKED "ASSUMED" BELOW.
- * The city and the setlist came from the band. `venues`, `radius` and the
- * booking address did not — they are the Carper Diem lines, kept because the
- * two bands work the same area, and nobody has confirmed them for this one.
+ * ⚠ CHECK THE THINGS MARKED "ASSUMED" BELOW. The city and the setlist came
+ * from the band. `venues` and `radius` are the Carper Diem lines, kept because
+ * the two bands work the same area. The lineup is a guess at the instruments.
  */
 
 export const BAND = {
@@ -35,10 +34,14 @@ export const BAND = {
   radius:
     "Southern Wisconsin and northern Illinois — Madison, Milwaukee, the Dells, Chicago. Further for the right room.",
 
-  /* ⚠ ASSUMED — THIS ADDRESS DOES NOT EXIST YET. Set it up as a forward at
-     GoDaddy, pointing at whoever actually checks it, or mail sent from the
-     site goes nowhere. Don't ship a personal Gmail. */
-  email: "booking@theanalogsband.com",
+  /* ⭐ WHERE THE BOOKING FORM SENDS. There is no band email address on purpose
+     (owner: not paying for one) — the form on the page posts to Web3Forms,
+     which forwards each inquiry to one inbox for free.
+     To switch it on: go to web3forms.com, enter the email of whoever handles
+     booking (the lead guitarist), and paste the access key it emails back
+     here. The key is meant to be public; it only names the destination inbox.
+     ⚠ While this is "", the form shows but says booking is not open yet. */
+  formKey: "",
 
   /* The share card — 1200x630, dropped in public/ as og.jpg, then set this to
      "/og.jpg". Left empty the link still posts, just without a picture. */
@@ -96,9 +99,18 @@ export const BAND_PHOTO = {
 
 /**
  * The band. One row per player: { part: "Guitar", name: "…" }. `name` and
- * `photo` are optional. Empty hides the section and its nav link.
+ * `photo` are optional.
  */
-export const LINEUP: { part: string; name?: string; photo?: string }[] = [];
+export const LINEUP: { part: string; name?: string; photo?: string }[] = [
+  /* ⚠ ASSUMED — PLACEHOLDER ROWS. Only "lead guitar" is known for certain; the
+     rest is the usual four-piece. Fix the parts, add or remove rows, and add
+     `name:` to any of them. Four rows fill the grid evenly — see .lineup in
+     globals.css if the count changes. */
+  { part: "Vocals" },
+  { part: "Lead guitar" },
+  { part: "Bass" },
+  { part: "Drums" },
+];
 
 /**
  * Upcoming shows. Delete rows once they pass — an old date at the top of the

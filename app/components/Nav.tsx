@@ -1,4 +1,4 @@
-import { BAND, BAND_PHOTO, LINEUP, RANGE } from "../content";
+import { BAND, LINEUP, RANGE } from "../content";
 
 export default function Nav() {
   return (
@@ -6,7 +6,7 @@ export default function Nav() {
       <div className="nav-inner">
         <a href="#top" className="nav-mark">{BAND.name}</a>
         <div className="nav-links label">
-          {(BAND_PHOTO.src || LINEUP.length > 0) && <a href="#band">The band</a>}
+          {LINEUP.length > 0 && <a href="#band">The band</a>}
           {RANGE.length > 0 && <a href="#music">Music</a>}
           <a href="#shows">Shows</a>
           <a href="#live">Live</a>

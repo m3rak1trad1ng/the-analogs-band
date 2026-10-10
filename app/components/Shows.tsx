@@ -33,7 +33,8 @@ export default function Shows() {
           {SHOWS.length === 0 ? (
             <div className="empty">
               <strong>No dates posted right now</strong>
-              We&rsquo;re booking the next run. If you want us on your calendar, email us.
+              We&rsquo;re booking the next run. If you want us on your calendar,{" "}
+              <a href="#booking">send us the date</a>.
             </div>
           ) : (
             SHOWS.map((s, i) => (

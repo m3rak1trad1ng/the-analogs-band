@@ -1,17 +1,22 @@
 import { BAND } from "../content";
 
 export default function Footer() {
-  const socials = BAND.socials.filter((s) => s.href);
-
   return (
     <footer className="footer">
       <div className="wrap footer-inner">
         <div>{BAND.name} · {BAND.city}</div>
         <div className="footer-links label">
-          {socials.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
-          ))}
-          <a href={`mailto:${BAND.email}`}>Booking</a>
+          {BAND.socials.map((s) =>
+            s.href ? (
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
+            ) : (
+              /* A placeholder, not a link: the label holds the spot and goes
+                 live the moment an address is added in content.ts. A link to
+                 nowhere would be worse than no link. */
+              <span key={s.label} className="footer-soon" title="Coming soon">{s.label}</span>
+            ),
+          )}
+          <a href="#booking">Booking</a>
         </div>
       </div>
     </footer>
