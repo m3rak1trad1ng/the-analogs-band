@@ -28,7 +28,7 @@ export default function Nav({ home = true }: { home?: boolean }) {
           {LINEUP.length > 0 && <Link href={to("#band")}>The band</Link>}
           {RANGE.length > 0 && <Link href={to("#music")}>Music</Link>}
           <Link href={to("#shows")}>Shows</Link>
-          <Link href="/media/" aria-current={home ? undefined : "page"}>Media</Link>
+          <Link href="/media/" className="nav-keep" aria-current={home ? undefined : "page"}>Media</Link>
           <Link href={to("#booking")} className="btn btn-sm">Book us</Link>
         </div>
       </div>
