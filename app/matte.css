@@ -174,7 +174,10 @@ html[data-theme] .hero-inner { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem,
    waveform is a drawing, the record turns once a minute. The meter's needle
    still rides — it is the one moving thing the owner asked to keep. */
 html[data-theme] .marquee { justify-content: center; padding-block: 1rem; }
-html[data-theme] .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; padding-right: 0; }
+/* ⚠ `flex: 1 1 100%` and `min-width: 0`, or the track keeps its one-line width
+   and the ends are cut off on a phone instead of wrapping. */
+html[data-theme] .marquee-track { animation: none; transform: none; flex: 1 1 100%; width: 100%; min-width: 0; flex-wrap: wrap; justify-content: center; gap: 0.15rem 1.4rem; padding: 0 var(--pad); }
+html[data-theme] .marquee span { font-size: clamp(1rem, 2.2vw, 1.25rem); }
 html[data-theme] .marquee-track[aria-hidden="true"] { display: none; }
 html[data-theme] .signal-bar { animation: none; transform: scaleY(0.85); }
 html[data-theme] .hero[data-hot] .signal-bar { animation: none; }

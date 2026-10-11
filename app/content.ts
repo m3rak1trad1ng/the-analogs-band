@@ -59,7 +59,7 @@ export const BAND = {
      built after the band asked for "less glitzy… matte not glossy… pastel or
      Kodachrome": "koda" (Kodachrome on cream), "pastel" (pastels on cream),
      "koda-dark" (Kodachrome on flat slate). All of it lives in app/matte.css. */
-  theme: "",
+  theme: "koda",
 
   heroArt: "meter",
 
