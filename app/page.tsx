@@ -4,7 +4,6 @@ import Marquee from "./components/Marquee";
 import Lineup from "./components/Lineup";
 import Range from "./components/Range";
 import Shows from "./components/Shows";
-import Live from "./components/Live";
 import Booking from "./components/Booking";
 import Footer from "./components/Footer";
 import StructuredData from "./components/StructuredData";
@@ -20,7 +19,6 @@ export default function Page() {
         <Lineup />
         <Range />
         <Shows />
-        <Live />
         <Booking />
       </main>
       <Footer />

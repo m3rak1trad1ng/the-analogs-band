@@ -15,7 +15,10 @@ export const BAND = {
   url: "https://www.theanalogsband.com",
 
   /* Genre + city. The one line a booker reads before deciding anything. */
-  kicker: "Cover band · Madison, Wisconsin",
+  /* ⛔ NEVER "COVER BAND". The band asked for the phrase to go (2026-10-10) —
+     not here, not in a heading, not in the page title. Say where they are and
+     what they play; let the reader draw the conclusion. */
+  kicker: "Madison, Wisconsin",
 
   /* Machine-readable genres for Google. Plain names: "Classic rock", "Funk". */
   genres: ["Classic rock", "Alternative rock", "Rock"] as string[],
@@ -81,13 +84,13 @@ export const MARQUEE: string[] = [
 
 /**
  * What the band plays, in three blocks. This is the answer to the one question
- * a booker has about a cover band: "will my crowd know these songs?"
+ * a booker has: "will my crowd know these songs?"
  *
  * ⛔ Genres and eras only — no artist names, no song titles (owner's rule).
  * Written from the band's setlist; reword freely. Empty hides the section.
  */
 export const RANGE_INTRO =
-  "Covers from the ’60s through the 2010s, picked for one thing: the room knows the words.";
+  "Songs from the ’60s through the 2010s, picked for one thing: the room knows the words.";
 
 export const RANGE: { name: string; text: string }[] = [
   {

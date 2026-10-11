@@ -813,6 +813,11 @@ main .section::before {
 }
 .book-email:hover { color: var(--amber); }
 
+/* ---------- media page ---------- */
+.media-page { padding-top: clamp(1rem, 3vw, 2.5rem); }
+.media-foot { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem); }
+.nav-links a[aria-current="page"] { color: var(--amber); }
+
 /* ---------- footer ---------- */
 
 .footer { padding-block: 0 3rem; color: var(--bone-3); font-size: 0.98rem; text-align: center; }

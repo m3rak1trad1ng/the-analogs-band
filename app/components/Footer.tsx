@@ -1,6 +1,6 @@
 import { BAND } from "../content";
 
-export default function Footer() {
+export default function Footer({ home = true }: { home?: boolean }) {
   return (
     <footer className="footer">
       <div className="wrap footer-inner">
@@ -20,7 +20,7 @@ export default function Footer() {
               <span key={s.label} className="footer-soon" title="Coming soon">{s.label}</span>
             ),
           )}
-          <a href="#booking">Booking</a>
+          <a href={home ? "#booking" : "../#booking"}>Booking</a>
         </div>
       </div>
     </footer>
