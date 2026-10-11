@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Oswald, Inter } from "next/font/google";
 import { BAND } from "./content";
 import "./globals.css";
+import "./matte.css";
 
 /* Three faces, three jobs: Playfair Display is the headline serif — chosen to
    sit beside the band's own hand-lettered logo, which a condensed poster face
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${oswald.variable} ${inter.variable}`}>
+    <html lang="en" data-theme={BAND.theme || undefined} className={`${display.variable} ${oswald.variable} ${inter.variable}`}>
       <body>
         <a className="skip" href="#booking">Skip to booking</a>
         {children}

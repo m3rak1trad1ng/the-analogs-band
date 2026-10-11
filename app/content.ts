@@ -55,11 +55,18 @@ export const BAND = {
 
   /* The graphic in the hero: "meter" (a VU meter), "record" (a turning record),
      "wave" (a signal trace) or "" for none. */
+  /* The look. "" is the black-and-gold stage version. The matte ones were
+     built after the band asked for "less glitzy… matte not glossy… pastel or
+     Kodachrome": "koda" (Kodachrome on cream), "pastel" (pastels on cream),
+     "koda-dark" (Kodachrome on flat slate). All of it lives in app/matte.css. */
+  theme: "",
+
   heroArt: "meter",
 
-  /* The band's own logo, shown as the name at the top of the page. It sits on
-     black, which is why the page's background is black too. */
-  logo: "/brand/logo.webp",
+  /* The band's own logo, shown as the name at the top of the page. Filled in
+     below from `theme`: the original gold-on-black for the gold look, and a
+     cut-out flat version (scripts/make-logo-variants.mjs) for the matte ones. */
+  logo: "",
 
   /* The share card — 1200x630, dropped in public/ as og.jpg, then set this to
      "/og.jpg". Left empty the link still posts, just without a picture. */
@@ -81,6 +88,11 @@ export const MARQUEE: string[] = [
   "The ’60s to the 2010s",
   "Madison, Wisconsin",
 ];
+
+BAND.logo =
+  BAND.theme === "koda-dark" ? "/brand/logo-cream.png"
+  : BAND.theme ? "/brand/logo-ink.png"
+  : "/brand/logo.webp";
 
 /**
  * What the band plays, in three blocks. This is the answer to the one question

@@ -1,0 +1,161 @@
+/* ============================================================
+   MATTE THEMES — the band's feedback, 2026-10-10:
+   "less glitzy… matte not glossy… maybe pastel or Kodachrome colors."
+
+   Everything the gold version does with light — foil gradients, glows,
+   spotlights, dust, glass, reflections — is switched off here and
+   replaced with what print does: flat ink on paper, solid color
+   blocks, a halftone dot, a hard offset shadow. The color-block
+   portraits come straight from the band's own pop-art collage.
+
+   Chosen with BAND.theme in content.ts. Nothing in this file applies
+   when that is empty.
+   ============================================================ */
+
+html[data-theme="koda"] {
+  --ink-0: #f2e8d5; --ink-1: #ebdfc8; --ink-2: #e2d4b9; --rule: #cbbb9c;
+  --bone: #1f2428; --bone-2: #3a4046; --bone-3: #5d6166;
+  --amber: #cf4a2b; --amber-hi: #b93d20; --signal: #1f6f6b;
+  --c1: #2e8f8a; --c2: #e3a72b; --c3: #cf4a2b; --c4: #4f8fb8;
+  --block: #1f6f6b; --on-block: #f2e8d5; --strip: #e3a72b; --on-strip: #1f2428;
+}
+html[data-theme="pastel"] {
+  --ink-0: #f7f0e6; --ink-1: #f0e7da; --ink-2: #e8ddcd; --rule: #d6c9b6;
+  --bone: #2b2a33; --bone-2: #4a4853; --bone-3: #6d6a75;
+  --amber: #c9695f; --amber-hi: #b3564c; --signal: #5c7f76;
+  --c1: #a9d4c5; --c2: #f3d68a; --c3: #eaa9a2; --c4: #aebbe6;
+  --block: #aebbe6; --on-block: #2b2a33; --strip: #eaa9a2; --on-strip: #2b2a33;
+}
+html[data-theme="koda-dark"] {
+  --ink-0: #1d242c; --ink-1: #232b34; --ink-2: #2b343e; --rule: #3c4752;
+  --bone: #f2e8d5; --bone-2: #d9cfbd; --bone-3: #a9a59b;
+  --amber: #e3a72b; --amber-hi: #f0bb4c; --signal: #e0634a;
+  --c1: #2e8f8a; --c2: #e3a72b; --c3: #cf4a2b; --c4: #4f8fb8;
+  --block: #cf4a2b; --on-block: #f2e8d5; --strip: #2e8f8a; --on-strip: #f2e8d5;
+}
+
+/* ---- the page: paper, not a stage ---- */
+html[data-theme] body { background-image: none; }
+html[data-theme] body::after { opacity: 0.32; mix-blend-mode: multiply; }
+html[data-theme="koda-dark"] body::after { opacity: 0.2; mix-blend-mode: normal; }
+html[data-theme] main .section:not(.booking) { background: none; }
+html[data-theme] main .section::before, html[data-theme] .footer::before {
+  height: 1px; background: var(--rule);
+}
+html[data-theme] :focus-visible { outline-color: var(--bone); }
+
+/* ---- type: ink, not foil ---- */
+html[data-theme] .section h2, html[data-theme] .hero-tagline {
+  background: none; -webkit-text-fill-color: currentColor; color: var(--bone);
+}
+html[data-theme] .section-head .label, html[data-theme] .book-cta-kicker { color: var(--amber); }
+
+/* ---- nav + logo ----
+   The matte themes use a cut-out, flat version of the logo (see content.ts), so
+   none of the blending and masking the gold-on-black original needs applies. */
+html[data-theme] .nav { background: var(--ink-0); }
+html[data-theme] .nav-mark img, html[data-theme] .hero-title img,
+html[data-theme] .footer-logo, html[data-theme] .album-sleeve img {
+  mix-blend-mode: normal; -webkit-mask-image: none; mask-image: none; opacity: 1; filter: none;
+}
+/* The sleeve is a color block in every matte theme, so its logo is always ink. */
+html[data-theme="koda-dark"] .album-sleeve img { filter: brightness(0) saturate(100%) invert(11%); }
+
+/* ---- hero: color and a halftone, no lights ---- */
+html[data-theme] .hero {
+  background:
+    radial-gradient(circle at center, color-mix(in srgb, var(--bone) 16%, transparent) 1.2px, transparent 1.5px) 0 0 / 9px 9px,
+    var(--ink-0);
+}
+html[data-theme] .hero::after { border-color: var(--bone); box-shadow: none; border-width: 2px; }
+html[data-theme] .hero::before, html[data-theme] .hero-lights, html[data-theme] .hero-dust { display: none; }
+html[data-theme] .hero-rail { color: var(--bone-2); }
+html[data-theme] .hero-hook { color: var(--bone-2); }
+
+/* ---- meter: a flat drawing of a meter ---- */
+html[data-theme] .hero-art-meter .meter { filter: drop-shadow(7px 7px 0 var(--c2)); }
+html[data-theme] .meter [fill="url(#m-case)"] { fill: var(--bone); stroke: none; }
+html[data-theme] .meter [fill="url(#m-lip)"] { fill: var(--bone); }
+html[data-theme] .meter [fill="url(#m-face)"] { fill: #f8f1df; }
+html[data-theme] .meter [fill="url(#m-vig)"], html[data-theme] .meter [fill="url(#m-glass)"] { display: none; }
+html[data-theme] .meter [fill="url(#m-plate)"] { fill: var(--bone); }
+html[data-theme] .meter [fill="url(#m-hub)"] { fill: var(--c2); stroke: none; }
+html[data-theme] .meter rect[fill="none"] { display: none; }
+html[data-theme] .m-needle { filter: none; }
+html[data-theme] .m-arc.m-red, html[data-theme] .m-tick.m-red { stroke: var(--c3); }
+html[data-theme] .m-band { stroke: var(--c3); opacity: 1; }
+html[data-theme] .m-redfill { fill: var(--c3); }
+html[data-theme] .m-peak { fill: #f8f1df; }
+html[data-theme] .signal-bar { stroke: var(--c1); }
+html[data-theme] .signal-axis { stroke: var(--bone-3); }
+html[data-theme] .hero[data-hot] .meter { filter: drop-shadow(7px 7px 0 var(--c3)); transform: none; }
+html[data-theme] .hero[data-hot] .signal-bar { stroke: var(--c3); }
+html[data-theme] .hero[data-hot] .m-lamp { filter: none; fill: var(--c3); }
+
+/* ---- buttons: flat, with a printed offset ---- */
+html[data-theme] .btn { box-shadow: none; color: #f8f1df; }
+html[data-theme="koda-dark"] .btn { color: #1d242c; }
+html[data-theme] .btn::after { display: none; }
+html[data-theme] .btn:not(:disabled):hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--bone); }
+html[data-theme] .btn-ghost { color: var(--bone); border-color: var(--bone); border-width: 2px; background: transparent; }
+html[data-theme] .btn-ghost:hover { background: transparent; color: var(--bone); border-color: var(--bone); }
+
+/* ---- strip + booking: solid color blocks ---- */
+html[data-theme] .marquee { background: var(--strip); border-color: var(--bone); border-block-width: 2px; box-shadow: none; }
+html[data-theme] .marquee span { color: var(--on-strip); }
+html[data-theme] .marquee span.hot { color: var(--on-strip); opacity: 0.6; }
+html[data-theme] .booking {
+  background: var(--block); border-top: 2px solid var(--bone); box-shadow: none; color: var(--on-block);
+}
+html[data-theme] .booking::before { background: color-mix(in srgb, var(--on-block) 35%, transparent); }
+html[data-theme] .booking h2, html[data-theme] .booking .lede, html[data-theme] .booking .lede-2,
+html[data-theme] .booking .book-form label > span, html[data-theme] .booking .section-head .label,
+html[data-theme] .booking .book-cta-kicker, html[data-theme] .booking .form-note { color: var(--on-block); }
+html[data-theme] .booking .book-form em { color: var(--on-block); opacity: 0.7; }
+html[data-theme] .booking .section-head .hr, html[data-theme] .booking .book-cta { background-color: transparent; border-top-color: color-mix(in srgb, var(--on-block) 35%, transparent); }
+html[data-theme] .booking .section-head .hr { background: color-mix(in srgb, var(--on-block) 35%, transparent); }
+html[data-theme] .booking .book-form input, html[data-theme] .booking .book-form textarea {
+  background: #f8f1df; border: 2px solid #1f2428; color: #1f2428; color-scheme: light;
+}
+html[data-theme] .booking .btn { background: #1f2428; border-color: #1f2428; color: #f8f1df; }
+
+/* ---- portraits: the band's own collage, as a system ---- */
+html[data-theme] .lineup-shot { border: 2px solid var(--bone); }
+html[data-theme] .lineup-shot img { filter: grayscale(1) contrast(1.5) brightness(1.12); }
+html[data-theme] .lineup-shot::before { background: var(--c1); mix-blend-mode: multiply; opacity: 1; }
+html[data-theme] .lineup-cards li:nth-child(2) .lineup-shot::before { background: var(--c2); }
+html[data-theme] .lineup-cards li:nth-child(3) .lineup-shot::before { background: var(--c3); }
+html[data-theme] .lineup-cards li:nth-child(4) .lineup-shot::before { background: var(--c4); }
+html[data-theme] .lineup-shot::after {
+  /* A halftone in place of the vignette, and a solid bar for the caption. */
+  background:
+    linear-gradient(180deg, transparent 80%, var(--bone) 80%),
+    radial-gradient(circle at center, rgba(0,0,0,0.16) 1px, transparent 1.4px) 0 0 / 6px 6px;
+  box-shadow: none;
+}
+html[data-theme] .lineup-cards li:hover .lineup-shot::before { opacity: 1; }
+html[data-theme] .lineup-cards li:hover .lineup-shot::after { opacity: 1; }
+html[data-theme] .lineup-cards li:hover .lineup-shot img { filter: grayscale(1) contrast(1.5) brightness(1.12); transform: scale(1.03); }
+html[data-theme] .lineup-cards .lineup-part { color: var(--ink-0); }
+html[data-theme] .lineup-cards .lineup-text { bottom: 4.5%; }
+html[data-theme] .lineup-cards .lineup-text::before { display: none; }
+
+/* ---- what we play ---- */
+html[data-theme] .range li:hover { background: none; }
+html[data-theme] .range-name { color: var(--bone); }
+html[data-theme] .range-n { color: var(--amber); }
+html[data-theme] .album-sleeve {
+  background: var(--c2); transform: rotate(-2.5deg);
+  box-shadow: inset 0 0 0 2px var(--bone), 8px 8px 0 var(--bone);
+}
+html[data-theme="koda-dark"] .album-sleeve { background: var(--c2); box-shadow: 8px 8px 0 #11161b; }
+html[data-theme] .album-foot { color: #1f2428; }
+html[data-theme] .album-disc { filter: none; }
+html[data-theme] .vinyl-sheen { display: none; }
+html[data-theme] .album [fill="url(#v-label)"] { fill: var(--c3); }
+
+/* ---- the rest ---- */
+html[data-theme] .slot { background: var(--ink-1); box-shadow: none; border: 2px dashed var(--rule); }
+html[data-theme] .slot-play { border-color: var(--amber); }
+html[data-theme] .empty { background: var(--ink-1); }
+html[data-theme] .footer-soon { opacity: 0.55; }
