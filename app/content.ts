@@ -1,3 +1,5 @@
+import { OG_IMAGE } from "./og-image";
+
 /**
  * ⭐ EDIT THIS FILE, NOT THE COMPONENTS.
  * Every word, date and link on the site lives here.
@@ -68,9 +70,11 @@ export const BAND = {
      cut-out flat version (scripts/make-logo-variants.mjs) for the matte ones. */
   logo: "",
 
-  /* The share card — 1200x630, dropped in public/ as og.jpg, then set this to
-     "/og.jpg". Left empty the link still posts, just without a picture. */
-  og: "/og.jpg",
+  /* The share card. ⛔ Not a file to edit or replace by hand: scripts/make-og.mjs
+     builds it on every deploy and names it after a fingerprint of its pixels,
+     so a redesign can never be shared with the old picture (it was, once —
+     the address used to be a fixed /og.jpg and phones had cached it). */
+  og: OG_IMAGE,
 
   socials: [
     { label: "Facebook", href: "" },
