@@ -182,8 +182,23 @@ export const SHOWS: {
 export const VIDEO_SLOTS = 2;
 export const PHOTO_SLOTS = 3;
 
-/** YouTube videos. id: the part after v= in the URL. */
-export const VIDEOS: { id: string; title: string }[] = [];
+/**
+ * Videos. Two kinds:
+ *   { id: "dQw4w9WgXcQ", title: "…" }                 a YouTube video (the part after v=)
+ *   { src: "/media/x.mp4", poster: "/media/x.jpg", … } a file in public/media/
+ *
+ * ⚠ A FILE ON THIS SITE MUST BE UNDER 100 MB (GitHub refuses anything larger),
+ *   and the whole site under 1 GB — about ten songs. Prepare one with:
+ *     ffmpeg -i in.mp4 -c:v libx264 -crf 18 -preset slow -c:a aac -b:a 192k -movflags +faststart out.mp4
+ *   `+faststart` is what lets it start playing before it has downloaded.
+ * `aspect` is width / height of the picture; leave it out for widescreen.
+ * ⛔ No song titles or artist names in `title` — the band's rule for the site.
+ */
+export const VIDEOS: { id?: string; src?: string; poster?: string; aspect?: number; title: string }[] = [
+  /* Recorded on stage, cropped out of a phone-shaped export (the picture was
+     720x640 inside 720x1280 of black bars), re-encoded CRF 18. 2:55, 48 MB. */
+  { src: "/media/live-01.mp4", poster: "/media/live-01.jpg", aspect: 720 / 640, title: "" },
+];
 
 /**
  * Photos. Drop files in public/photos/ and list them here.

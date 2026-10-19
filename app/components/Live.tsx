@@ -30,20 +30,33 @@ export default function Live() {
         {VIDEOS.length + emptyVideos > 0 && (
           <div className="video-grid" style={{ marginTop: "clamp(2rem, 4vw, 3rem)" }}>
             {VIDEOS.map((v) => (
-              <div key={v.id}>
-                <div className="video-frame">
-                  {/* Embedded, not hosted — YouTube serves the file, this page
-                      just shows a window into it. No size cap, no bandwidth
-                      cost, works on a static host. */}
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${v.id}`}
-                    title={v.title}
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                  />
+              <div key={v.id ?? v.src}>
+                <div className="video-frame" style={v.aspect ? { aspectRatio: String(v.aspect) } : undefined}>
+                  {v.src ? (
+                    /* Hosted here. ⚠ preload="none" with a poster: nobody
+                       downloads 50 MB until they press play. playsInline keeps
+                       it in the page on an iPhone instead of going full screen. */
+                    <video
+                      src={v.src}
+                      poster={v.poster}
+                      controls
+                      preload="none"
+                      playsInline
+                      aria-label={v.title || "The band live"}
+                    />
+                  ) : (
+                    /* Embedded, not hosted — YouTube serves the file, this page
+                       just shows a window into it. */
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${v.id}`}
+                      title={v.title}
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  )}
                 </div>
-                <p className="video-title">{v.title}</p>
+                {v.title && <p className="video-title">{v.title}</p>}
               </div>
             ))}
             {Array.from({ length: emptyVideos }, (_, i) => (
