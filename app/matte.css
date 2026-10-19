@@ -219,3 +219,4 @@ html[data-theme] .lineup-cards .lineup-text::after {
   html[data-theme] .lineup-cards .lineup-text { padding: 0.45rem 0 0.55rem; }
   html[data-theme] .lineup-cards .lineup-part { font-size: 0.62rem; letter-spacing: 0.1em; }
 }
+html[data-theme] .video-start-icon { box-shadow: 4px 4px 0 var(--bone); }

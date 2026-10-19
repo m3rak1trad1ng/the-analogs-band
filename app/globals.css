@@ -623,6 +623,25 @@ main .section::before {
 .video-frame { position: relative; aspect-ratio: 16 / 9; background: var(--ink-2); border: 1px solid var(--rule); }
 .video-frame iframe, .video-frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .video-frame video { object-fit: contain; background: #000; }
+/* The whole thumbnail is the play button: a big circle in the middle, and the
+   picture brightens a little under the pointer so it reads as clickable. */
+.video-start {
+  position: absolute; inset: 0; z-index: 1; border: 0; padding: 0; cursor: pointer;
+  background: rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.video-start:hover, .video-start:focus-visible { background: rgba(0,0,0,0); }
+.video-start-icon {
+  width: clamp(64px, 9vw, 88px); aspect-ratio: 1; border-radius: 50%; position: relative;
+  background: var(--amber); box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  transition: transform 0.2s;
+}
+.video-start:hover .video-start-icon { transform: scale(1.08); }
+.video-start-icon::after {
+  content: ""; position: absolute; left: 39%; top: 30%;
+  border-left: clamp(20px, 2.8vw, 27px) solid #fff;
+  border-top: clamp(12px, 1.7vw, 16px) solid transparent; border-bottom: clamp(12px, 1.7vw, 16px) solid transparent;
+}
 .video-title { margin: 0.7rem 0 0; font-size: 1rem; color: var(--bone-2); }
 
 /* ⭐ SLOTS — the frames a video or photo will land in, shown before it exists.

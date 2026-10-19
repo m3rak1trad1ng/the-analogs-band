@@ -1,5 +1,6 @@
 import { VIDEOS, PHOTOS, VIDEO_SLOTS, PHOTO_SLOTS } from "../content";
 import Gallery from "./Gallery";
+import HostedVideo from "./HostedVideo";
 
 /**
  * Video and photos — with the frames already in place before there is anything
@@ -33,17 +34,8 @@ export default function Live() {
               <div key={v.id ?? v.src}>
                 <div className="video-frame" style={v.aspect ? { aspectRatio: String(v.aspect) } : undefined}>
                   {v.src ? (
-                    /* Hosted here. ⚠ preload="none" with a poster: nobody
-                       downloads 50 MB until they press play. playsInline keeps
-                       it in the page on an iPhone instead of going full screen. */
-                    <video
-                      src={v.src}
-                      poster={v.poster}
-                      controls
-                      preload="none"
-                      playsInline
-                      aria-label={v.title || "The band live"}
-                    />
+                    /* Hosted here — the whole thumbnail starts it. */
+                    <HostedVideo src={v.src} poster={v.poster} label={v.title || "The band live"} />
                   ) : (
                     /* Embedded, not hosted — YouTube serves the file, this page
                        just shows a window into it. */
