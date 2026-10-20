@@ -30,9 +30,9 @@ export default function Hero() {
             the page's type stays out of its way. The <h1> text is still there
             for search engines and screen readers. */}
         <h1 className="hero-title">
-          {BAND.logo ? (
+          {BAND.wordmark ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={BAND.logo} alt={BAND.name} width={1535} height={1024} />
+            <img src={BAND.wordmark} alt={BAND.name} width={1366} height={517} />
           ) : (
             <span className="poster">{BAND.name}</span>
           )}

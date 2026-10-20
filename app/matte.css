@@ -220,3 +220,11 @@ html[data-theme] .lineup-cards .lineup-text::after {
   html[data-theme] .lineup-cards .lineup-part { font-size: 0.62rem; letter-spacing: 0.1em; }
 }
 html[data-theme] .video-start-icon { box-shadow: 4px 4px 0 var(--bone); }
+
+/* ---- the text-only wordmark (nav + hero) ----
+   It is about 2.6 times as wide as it is tall, where the full logo was 1.5,
+   so it is set by height in the nav and given a narrower box in the hero. And
+   the meter no longer tucks up under the logo's bottom star — there is no star. */
+html[data-theme] .nav-mark img { height: 44px; }
+html[data-theme] .hero-title { width: min(100%, 640px); margin-top: clamp(0.75rem, 2vw, 1.5rem); }
+html[data-theme] .hero-art-meter { margin-top: clamp(1.25rem, 3vw, 2.25rem); }

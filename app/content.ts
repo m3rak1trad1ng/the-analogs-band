@@ -69,6 +69,11 @@ export const BAND = {
      below from `theme`: the original gold-on-black for the gold look, and a
      cut-out flat version (scripts/make-logo-variants.mjs) for the matte ones. */
   logo: "",
+  /* Just the lettering — no instruments, oval or stars
+     (scripts/make-logo-wordmark.mjs). The band wanted text only in the nav and
+     at the top of the front page (2026-10-19); the full logo stays everywhere
+     else. Filled in below from `theme`. */
+  wordmark: "",
 
   /* The share card. ⛔ Not a file to edit or replace by hand: scripts/make-og.mjs
      builds it on every deploy and names it after a fingerprint of its pixels,
@@ -97,6 +102,11 @@ BAND.logo =
   BAND.theme === "koda-dark" ? "/brand/logo-cream.png"
   : BAND.theme ? "/brand/logo-ink.png"
   : "/brand/logo.webp";
+/* ⚠ The gold theme has no cut-out lettering yet, so it keeps the full logo. */
+BAND.wordmark =
+  BAND.theme === "koda-dark" ? "/brand/wordmark-cream.png"
+  : BAND.theme ? "/brand/wordmark-ink.png"
+  : BAND.logo;
 
 /**
  * What the band plays, in three blocks. This is the answer to the one question

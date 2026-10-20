@@ -17,9 +17,9 @@ export default function Nav({ home = true }: { home?: boolean }) {
             clutter — owner: "why'd you get rid of the band name at top left?
             fix that." The name belongs in the corner of every screen. */}
         <Link href={home ? "#top" : "/"} className="nav-mark" aria-label={`${BAND.name} — ${home ? "back to top" : "home"}`}>
-          {BAND.logo ? (
+          {BAND.wordmark ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={BAND.logo} alt="" width={1535} height={1024} />
+            <img src={BAND.wordmark} alt="" width={1366} height={517} />
           ) : (
             BAND.name
           )}
